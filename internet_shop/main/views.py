@@ -2,4 +2,4 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def main_page(request):
-    return HttpResponse('Бла')
+    return render(request, 'base.html')
