@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} Категории {% endblock %}
+
+
+{% block content %} 
+<br>
+<h1> Это страница с категориями </h1>
+
+
+<div class="card-group">
+    
+    {% for category in all_categories %}
+
+    <div class="card">
+      <img src="{{ category.photo.url }}" class="card-img-top">
+      <div class="card-body">
+        <a href="/category/{{ category.id }}"><h5 class="card-title">{{category.title}}</h5></a>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+
+
+
+
+<p>{{ categoty }}</p>
+
+
+
+{% endblock%}
