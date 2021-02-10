@@ -1,0 +1,9 @@
+.category_title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.category_title img {
+    width: 50%;
+}

@@ -1,0 +1,40 @@
+
+
+.categories_categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.categories_category {
+    width: 24%;
+    
+    margin: 0px 5px;
+    margin-bottom: 10px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    
+}
+
+.categories_category:hover {
+    background-color: #e3e8e6;
+}
+
+.categories_category a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.categories_category img {
+    height: 170px;
+    width: 100%;
+}
+
+.categories_category .categories_title {
+    font-size: 18px;
+    line-height: 24px;
+}

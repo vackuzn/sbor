@@ -7,10 +7,11 @@
 
     <!-- Bootstrap CSS  -->
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    
 
     <!-- MyCss-->
     <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+
+    {% block for_connect_another %}{% endblock%}
 
     <title>{% block title %}{% endblock%}</title>
 </head>
