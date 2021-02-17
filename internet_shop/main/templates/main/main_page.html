@@ -2,14 +2,17 @@
 
 {% block title %} Главная {% endblock %}
 
+{% load static %}
+{% block for_connect_another %}<link rel="stylesheet" href="{% static 'main/css/main_page.css' %}">{% endblock%}
+
 
 {% block content %} 
 <br>
-<h1> Это главная страница... </h1>
+<h2> Это главная страница... </h2>
 <br>
-<h2> ... Поэтому ничего полезного здесь не будет </h2>
+<h3> ... Поэтому ничего полезного здесь не будет </h3>
 <br>
-<h2> А вот категории товаров можно посмотреть <a href="{% url 'categories' %}">здесь</a> </h2>
+<h4> А вот категории товаров можно посмотреть <a href="{% url 'categories' %}">здесь</a> </h4>
 {% endblock%}
 
     

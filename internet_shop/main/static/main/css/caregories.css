@@ -1,14 +1,14 @@
-
-
 .categories_categories {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    
+    
 }
 
 
 .categories_category {
-    width: 24%;
+    width: 23.9%;
     
     margin: 0px 5px;
     margin-bottom: 10px;
