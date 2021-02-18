@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Category
+from main.models import *
 from django.utils.safestring import mark_safe
 
 
@@ -23,7 +23,44 @@ class CategoryAdmin(admin.ModelAdmin):
     get_photo.short_description = 'Миниатюра'
 
 
+class ImageGalleryInline(admin.TabularInline):
+    model = ImageGallery
+    extra = 1
+    fields = ('additional_picture', 'created_at', 'get_photo')
+    readonly_fields = ('get_photo', 'created_at')
+
+    def get_photo(self, obj):
+        if obj.additional_picture:
+            res = mark_safe(f'<img src="{obj.additional_picture.url}" width="75">')
+        else:
+            res = "нет картинки"
+        return res
+
+    get_photo.short_description = 'Доп. картинка'
+
+
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ImageGalleryInline, ]
+    list_display = ('get_photo', 'title', 'article', 'is_published', 'category', 'price_unit', 'price_pack', 'views')
+    list_display_links = ('title', 'article')
+    search_fields = ('title', 'article', 'category')
+    list_editable = ('price_unit', 'price_pack', 'is_published')
+    fields = ('get_photo', 'main_image', 'title', 'article', 'category', 'is_published', 'description', 'price_unit',
+              'price_pack', 'views', 'created_at', 'update_at')
+    readonly_fields = ('get_photo', 'created_at', 'update_at', 'views')
+
+    def get_photo(self, obj):
+        if obj.main_image:
+            res = mark_safe(f'<img src="{obj.main_image.url}" width="75">')
+        else:
+            res = "нет картинки"
+        return res
+
+    get_photo.short_description = 'Главная картинка'
 
 
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Product, ProductAdmin)
 
+admin.site.site_title = "Админ панель"
+admin.site.site_header = "Админ панель"
