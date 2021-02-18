@@ -15,7 +15,7 @@
   {% for category in all_categories %}
     
     <div class="categories_category">
-        <a href="/category/category_{{ category.id }}">
+        <a href="/category/{{ category.slug }}">
         <div>
             <img src="{{ category.photo.url }}" alt="">
         </div>

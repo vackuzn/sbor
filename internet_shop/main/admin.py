@@ -9,7 +9,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('id', 'title')
     list_editable = ('is_published',)
 
-    fields = ('title', 'is_published', 'views', 'photo', 'get_photo')
+    fields = ('title', 'is_published', 'views', 'slug', 'photo', 'get_photo')
     readonly_fields = ('views', 'get_photo')
 
 

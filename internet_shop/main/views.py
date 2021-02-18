@@ -13,7 +13,7 @@ def categories(request):
     return render(request, 'main/categories.html', context)
 
 
-def category(request, id):
-    category = Category.objects.get(id=id)
+def category(request, slug):
+    category = Category.objects.get(slug=slug)
     context = {'category': category}
     return render(request, 'main/category.html', context)
