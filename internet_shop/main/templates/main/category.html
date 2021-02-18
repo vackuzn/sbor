@@ -12,7 +12,32 @@
     <h1>{{category.title}}</h1>
 </div>
 
+<br>
 <h2>Товары</h2>
+
+
+<div class="category_products">
+    {% for product in all_products %}
+        
+        <div class="category_product">
+
+            <div class="articl">Артикул: {{ product.article }}</div>
+            <a href="/product/{{ product.article }}">
+                <div class="product_img"><img src="{{ product.main_image.url }}" alt=""></div>
+                <div class="product_title">{{product.title}}</div>
+            </a>
+            
+            <br>
+            <div class="prices">
+                <div>Цена за штуку: {{ product.price_unit }}</div>
+                <div>Цена за упаковку: {{ product.price_pack }}</div>
+            </div>
+
+        </div>
+
+    {% endfor %}
+</div>
+
 
 
 

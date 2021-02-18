@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import Category
+from main.models import Category, Product
 
 
 def main_page(request):
@@ -15,5 +15,6 @@ def categories(request):
 
 def category(request, slug):
     category = Category.objects.get(slug=slug)
-    context = {'category': category}
+    all_products = Product.objects.filter(category=category)
+    context = {'category': category, 'all_products': all_products}
     return render(request, 'main/category.html', context)

@@ -56,7 +56,7 @@ class ProductAdmin(admin.ModelAdmin):
             res = "нет картинки"
         return res
 
-    get_photo.short_description = 'Главная картинка'
+    get_photo.short_description = 'Фото'
 
 
 admin.site.register(Category, CategoryAdmin)

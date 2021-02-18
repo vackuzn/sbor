@@ -19,17 +19,17 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    title = models.CharField(max_length=150, verbose_name='Название товара')
-    article = models.IntegerField(verbose_name='Артикул товара', unique=True)
-    description = models.TextField(verbose_name='Описание товара', blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория товара')
+    title = models.CharField(max_length=150, verbose_name='Название')
+    article = models.IntegerField(verbose_name='Артикул', unique=True)
+    description = models.TextField(verbose_name='Описание', blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     main_image = models.ImageField(verbose_name='Главное изображение', upload_to='product_photo/', blank=True)
     price_unit = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Цена за штуку')
     price_pack = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Цена за упаковку', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления товара')
-    update_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления товара')
-    is_published = models.BooleanField(default=True, verbose_name='Публикация (да/нет)')
-    views = models.IntegerField(default=0, verbose_name='Количество просмотров')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    is_published = models.BooleanField(default=True, verbose_name='Публикация')
+    views = models.IntegerField(default=0, verbose_name='Кол-во просмотров')
 
     def __str__(self):
         return self.title
