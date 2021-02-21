@@ -17,7 +17,7 @@
 
 
 <div class="category_products">
-    {% for product in all_products %}
+    {% for product in page_obj %}
         
         <div class="category_product">
 
@@ -35,7 +35,27 @@
 
         </div>
 
+    {% endfor %} 
+</div>
+
+<div>
+    {% for i in page_obj.paginator.page_range %}
+      {% if i == page_obj.number %}  
+        <a href="?page={{ i }}" style=color:red;>{{ i }}</a>
+      {% elif i > page_obj.number|add:-3 and i < page_obj.number|add:3 %}
+        <a href="?page={{ i }}" style=color:green;>{{ i }}</a>
+      {% endif %}
     {% endfor %}
+  </div>
+
+<div>
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">Кнопка назад</a>
+  {% endif %}
+  
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Кнопка вперед</a>
+  {% endif %}
 </div>
 
 

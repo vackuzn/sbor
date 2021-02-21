@@ -37,7 +37,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
-        ordering = ['-created_at']
+        ordering = ['-views']
 
 
 class ImageGallery(models.Model):
