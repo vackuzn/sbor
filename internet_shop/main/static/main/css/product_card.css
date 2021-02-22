@@ -1,0 +1,27 @@
+
+.product_card {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    
+}
+
+.product_title_and_description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.product_title_and_description h4 {
+    color: gray;
+}
+
+.main_picture img {
+    height: 350px;
+}
+
+.additional_pictures img {
+    width: 100px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}

@@ -25,11 +25,25 @@ def category(request, slug):
     category.save()
 
     # пагинация
-    paginator = Paginator(all_products, 2)
+    paginator = Paginator(all_products, 4)
     page_num = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_num)
 
     context = {'category': category, 'page_obj': page_obj}
     return render(request, 'main/category.html', context)
+
+
+def product_card(request, pk):
+    product = Product.objects.get(pk=pk)
+    additional_pictures = product.imagegallery_set.all()
+    context = {'product': product, 'additional_pictures': additional_pictures}
+
+    print(additional_pictures)
+    for i in additional_pictures:
+        print(i.additional_picture)
+
+    return render(request, 'main/product_card.html', context)
+
+
 
 
