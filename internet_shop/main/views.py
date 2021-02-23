@@ -36,12 +36,9 @@ def category(request, slug):
 def product_card(request, pk):
     product = Product.objects.get(pk=pk)
     additional_pictures = product.imagegallery_set.all()
+    product.views = F('views') + 1
+    product.save()
     context = {'product': product, 'additional_pictures': additional_pictures}
-
-    print(additional_pictures)
-    for i in additional_pictures:
-        print(i.additional_picture)
-
     return render(request, 'main/product_card.html', context)
 
 
