@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %} {{category.title}} {% endblock %}
+
+{% load static %}
+{% block for_connect_another %}<link rel="stylesheet" href="{% static 'main/css/caregory.css' %}">{% endblock%}
+
+{% block content %} 
+
+<div class="category_title">
+    <img src="{{ category.photo.url }}" alt="">
+    <h1>{{category.title}}</h1>
+</div>
+
+<br>
+<h2>Товары</h2>
+
+
+<div class="category_products">
+    {% for product in page_obj %}
+        
+        <div class="category_product">
+
+            <div class="articl">Артикул: {{ product.article }}</div>
+            <a href="/product/{{ product.pk }}">
+                <div class="product_img"><img src="{{ product.main_image.url }}" alt=""></div>
+                <div class="product_title">{{product.title}}</div>
+            </a>
+            
+            <br>
+            <div class="prices">
+                <div>Цена за штуку: {{ product.price_unit }}</div>
+                <div>Цена за упаковку: {{ product.price_pack }}</div>
+            </div>
+
+        </div>
+
+    {% endfor %} 
+</div>
+
+<div>
+    {% for i in page_obj.paginator.page_range %}
+      {% if i == page_obj.number %}  
+        <a href="?page={{ i }}" style=color:red;>{{ i }}</a>
+      {% elif i > page_obj.number|add:-3 and i < page_obj.number|add:3 %}
+        <a href="?page={{ i }}" style=color:green;>{{ i }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+<div>
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">Кнопка назад</a>
+  {% endif %}
+  
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Кнопка вперед</a>
+  {% endif %}
+</div>
+
+
+
+
+
+
+{% endblock%}

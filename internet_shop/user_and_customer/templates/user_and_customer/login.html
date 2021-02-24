@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} Авторизация {% endblock %}
+
+{% load static %}
+
+{% block for_connect_another %}<link rel="stylesheet" href="{% static 'user_and_customer/css/login.css' %}">{% endblock%}
+
+
+{% block content %} 
+
+
+<div class="login_form">
+    <h2>Авторизация</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Войти</button>
+    </form>
+</div>
+
+
+{% endblock%}

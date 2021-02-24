@@ -1,0 +1,14 @@
+
+.register_form {
+    width: 600px;
+    margin: auto;
+    
+
+}
+    
+
+.register_form form {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
