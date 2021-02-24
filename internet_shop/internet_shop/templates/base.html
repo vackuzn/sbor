@@ -34,8 +34,16 @@
                 <a href="#">Тоже_в_никуда</a>
             </div>
 
-            <div class="button_and_basket align_items_center">
-                <button>Войти</button>
+            <div class="user_and_basket align_items_center">
+                <div class="user">
+                    {% if request.user.is_authenticated %}
+                        {{ request.user.username }} | <a href="{% url 'logout' %}">Выйти</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'register' %}">Регистрация</a>
+                    {% endif %}
+                </div>
+
+
                 <div class="basket">
                     <a href="#"><img src="{% static 'img/basket.svg' %}"></a>
                 </div>
