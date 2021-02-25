@@ -27,6 +27,8 @@ SECRET_KEY = 'n1k*jbu1w107&d3+nr-ki7s8**)$huyfu7o3bkn@_49^b!0l*a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CART_SESSION_ID = 'cart'  # Это ключ, который мы собираемся использовать для хранения корзины в сессии пользователя.
+
 ALLOWED_HOSTS = []
 
 
@@ -41,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'user_and_customer.apps.UserAndCustomerConfig',
+    'cart.apps.CartConfig'
+
 ]
 
 MIDDLEWARE = [
