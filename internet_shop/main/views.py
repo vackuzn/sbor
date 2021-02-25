@@ -6,7 +6,6 @@ from django.core.paginator import Paginator
 
 
 def main_page(request):
-    del request.session['foo']
     return render(request, 'main/main_page.html')
 
 
