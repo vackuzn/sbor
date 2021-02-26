@@ -45,7 +45,12 @@
 
 
                 <div class="basket">
-                    <a href="#"><img src="{% static 'img/basket.svg' %}"></a>
+                    {% if cart|length > 0 %}
+                        <a href="{% url 'cart' %}">Ведро:</a> {{ cart|length }} тов.
+                    {% else %}
+                        Ведро пустое
+                    {% endif %}
+
                 </div>
             </div>
 

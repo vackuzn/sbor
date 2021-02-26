@@ -25,6 +25,15 @@
         {% if product.price_pack %} 
         <h5>Цена за упаковку: {{product.price_pack}}</h5> 
         {% endif %}
+
+        <div class="cart">
+            <form method="POST" class="cart_form">
+                {% csrf_token %}
+                {{ form_cart.as_p }}
+                <button type="submit" class="button">Добавить в корзину</button>
+            </form>
+        </div>
+
     </div>
 
     <div class="pictures">

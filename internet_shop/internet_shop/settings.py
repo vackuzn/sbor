@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart_context_processor.cart',
             ],
         },
     },
@@ -130,6 +131,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'internet_shop/static'),
     os.path.join(BASE_DIR, 'internet_shop/main/static'),
     os.path.join(BASE_DIR, 'internet_shop/user_and_customer/static'),
+    os.path.join(BASE_DIR, 'internet_shop/cart/static'),
 ]
 
 

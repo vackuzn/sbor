@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %} {{product.title}} {% endblock %}
+
+{% load static %}
+
+{% block for_connect_another %}<link rel="stylesheet" href="{% static 'cart/css/cart.css' %}">{% endblock%}
+
+
+{% block content %} 
+
+
+<h2> Ваше ведро </h2>
+<br>
+
+<table class="cart_table">
+    <tr>
+        <th>Фото</th>
+        <th>Артикул</th>
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Общая цена</th>
+        <th>Удалить</th> 
+    </tr>
+
+    {% for item in cart %}
+        <tr>
+            <td><a href=" {{ item.product.get_absolute_url }}"><img src=" {{ item.product.main_image.url }}" alt=""></a></td>
+            <td>{{ item.product.article }}</td>
+            <td><a href=" {{ item.product.get_absolute_url }}">{{ item.product.title }}</a></td>
+            <td>{{ item.product.price_unit }}</td>
+            <td>{{ item.quantity }}</td>
+            <td><a href="/cart/cart_dell_product/{{item.product.id}}">Удалить</a></td> 
+            <td>{{ item.total_price }}</td>   
+        </tr>
+    {% endfor %}
+        <tr>
+            <td colspan="6">Общая стоимость</td>
+            <td>{{cart.get_total_price}}</td>
+        </tr>
+
+</table>
+
+<br>
+
+<a href="" class="make_order">Оформить заказ</a>
+
+
+
+
+
+{% endblock%}

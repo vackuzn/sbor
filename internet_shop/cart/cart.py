@@ -34,7 +34,7 @@ class Cart(object):
         self.session.modified = True
 
     def remove(self, product):
-        product_id = product.id
+        product_id = str(product.id)
         if product_id in self.cart:
             del self.cart[product_id]
             self.save()
@@ -48,7 +48,7 @@ class Cart(object):
 
         for item in self.cart.values():
             item['price'] = item['price']
-            item['total_price'] = item['price'] * item['quantity']
+            item['total_price'] = float(item['price']) * float(item['quantity'])
             yield item
 
     def __len__(self):

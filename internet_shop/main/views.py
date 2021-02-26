@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from main.models import Category, Product
 from django.db.models import Count, F
 from django.core.paginator import Paginator
+from cart.cart import Cart
+from cart.forms import CartAddProductForm
 
 
 def main_page(request):
@@ -25,7 +27,7 @@ def category(request, slug):
     category.save()
 
     # пагинация
-    paginator = Paginator(all_products, 4)
+    paginator = Paginator(all_products, 40)
     page_num = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_num)
 
@@ -36,9 +38,17 @@ def category(request, slug):
 def product_card(request, pk):
     product = Product.objects.get(pk=pk)
     additional_pictures = product.imagegallery_set.all()
+    form_cart = CartAddProductForm()
     product.views = F('views') + 1
     product.save()
-    context = {'product': product, 'additional_pictures': additional_pictures}
+    context = {'product': product, 'additional_pictures': additional_pictures, 'form_cart': form_cart}
+
+    if request.method == "POST":
+        cart = Cart(request)
+        form = CartAddProductForm(request.POST)
+        if form.is_valid():
+            cart.add(product=product, quantity=form.cleaned_data['quantity'])
+
     return render(request, 'main/product_card.html', context)
 
 
