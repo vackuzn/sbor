@@ -49,13 +49,3 @@ h4 {
 .product_img img {
     height: 150px;
 }
-
-.cart_form {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-}
-
-.cart_quantity {
-    width: 40px;
-}

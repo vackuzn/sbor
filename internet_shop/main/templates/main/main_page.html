@@ -8,7 +8,7 @@
 
 {% block content %} 
 
-<h4>4 самых просматриваемых товара:</h4>
+<h4>4 самых популярных товара:</h4>
 
 <div class="main_products">
     {% for product in products %}
@@ -28,15 +28,6 @@
             </div>
 
             <br>
-            
-            <div class="cart">
-              <form method="POST" class="cart_form">
-                  {% csrf_token %}
-                  <input type="hidden" name="id_product" value="{{product.id}}">
-                  {{ form_cart.quantity }}
-                  <button type="submit" class="button">Добавить в корзину</button>
-              </form>
-          </div>
 
         </div>
 
