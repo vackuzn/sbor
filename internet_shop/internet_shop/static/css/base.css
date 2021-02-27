@@ -46,6 +46,7 @@ body {
     flex-basis: 35%;
     display: flex;
     justify-content: space-between;
+    
 }
 
 
@@ -54,6 +55,13 @@ body {
     margin: auto;
     padding-left: 8px;
     padding-right: 8px;
+}
+
+.user,  .basket {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    
 }
 
 

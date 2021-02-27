@@ -20,6 +20,7 @@
     
     margin: 0px 5px;
     margin-bottom: 10px;
+    padding: 10px;
 
     font-family: Roboto;
     font-style: normal;
@@ -54,4 +55,15 @@
 .product_img img {
     height: 150px;
 }
+
+.cart_form {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.cart_quantity {
+    width: 40px;
+}
+
 

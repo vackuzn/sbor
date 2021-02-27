@@ -29,7 +29,8 @@
         <div class="cart">
             <form method="POST" class="cart_form">
                 {% csrf_token %}
-                {{ form_cart.as_p }}
+                <input type="hidden" name="id_product" value="{{product.id}}">
+                <p>{{ form_cart.quantity }}</p>
                 <button type="submit" class="button">Добавить в корзину</button>
             </form>
         </div>

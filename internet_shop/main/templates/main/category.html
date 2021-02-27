@@ -33,6 +33,17 @@
                 <div>Цена за упаковку: {{ product.price_pack }}</div>
             </div>
 
+            <br>
+            
+            <div class="cart">
+              <form method="POST" class="cart_form">
+                  {% csrf_token %}
+                  <input type="hidden" name="id_product" value="{{product.id}}">
+                  {{ form_cart.quantity }}
+                  <button type="submit" class="button">Добавить в корзину</button>
+              </form>
+          </div>
+
         </div>
 
     {% endfor %} 

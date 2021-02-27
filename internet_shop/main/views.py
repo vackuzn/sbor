@@ -8,7 +8,9 @@ from cart.forms import CartAddProductForm
 
 
 def main_page(request):
-    return render(request, 'main/main_page.html')
+    products = Product.objects.order_by('-views')[:4]
+    context = {'products': products}
+    return render(request, 'main/main_page.html', context)
 
 
 def categories(request):
@@ -20,6 +22,7 @@ def categories(request):
 def category(request, slug):
     category = Category.objects.get(slug=slug)
     all_products = Product.objects.filter(category=category, is_published=True)
+    form_cart = CartAddProductForm()
 
     # счетчик посещений этой категории
     if request.GET.get('page') == None:
@@ -31,7 +34,15 @@ def category(request, slug):
     page_num = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_num)
 
-    context = {'category': category, 'page_obj': page_obj}
+    # добавление товаров в корзину
+    if request.method == "POST":
+        cart = Cart(request)
+        form = CartAddProductForm(request.POST)
+        if form.is_valid():
+            product = Product.objects.get(id=form.cleaned_data['id_product'])
+            cart.add(product=product, quantity=form.cleaned_data['quantity'])
+
+    context = {'category': category, 'page_obj': page_obj, 'form_cart': form_cart}
     return render(request, 'main/category.html', context)
 
 
@@ -47,6 +58,7 @@ def product_card(request, pk):
         cart = Cart(request)
         form = CartAddProductForm(request.POST)
         if form.is_valid():
+            print("yes")
             cart.add(product=product, quantity=form.cleaned_data['quantity'])
 
     return render(request, 'main/product_card.html', context)
