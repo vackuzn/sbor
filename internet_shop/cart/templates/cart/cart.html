@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} {{product.title}} {% endblock %}
+{% block title %} Корзина {% endblock %}
 
 {% load static %}
 
@@ -43,7 +43,7 @@
     </table>
 
     <br>
-    <a href="" class="make_order">Оформить заказ</a>
+    <a href="{% url 'order' %}" class="make_order">Оформить заказ</a>
 
 {% else %}
     <h3>Корзина пуста</h3>

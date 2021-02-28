@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
 def order(request):
-    pass
+    return render(request, 'order_and_pay/order.html')

@@ -133,6 +133,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'internet_shop/main/static'),
     os.path.join(BASE_DIR, 'internet_shop/user_and_customer/static'),
     os.path.join(BASE_DIR, 'internet_shop/cart/static'),
+    os.path.join(BASE_DIR, 'internet_shop/order_and_pay/static'),
 ]
 
 
