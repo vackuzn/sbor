@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'user_and_customer.apps.UserAndCustomerConfig',
-    'cart.apps.CartConfig'
+    'cart.apps.CartConfig',
+    'order_and_pay.apps.OrderAndPayConfig',
 
 ]
 
