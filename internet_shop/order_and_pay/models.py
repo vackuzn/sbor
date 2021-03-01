@@ -22,8 +22,8 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, verbose_name='Пользователь')
     first_name = models.CharField(max_length=200, verbose_name='Имя')
     last_name = models.CharField(max_length=200, verbose_name='Фамилия')
-    phone = models.IntegerField(verbose_name='Адрес электронной почты')
-    email = models.EmailField(verbose_name='Телефон')
+    phone = models.IntegerField(verbose_name='Телефон')
+    email = models.EmailField(verbose_name='Адрес электронной почты')
     address = models.TextField(verbose_name='Адрес')
     city = models.CharField(max_length=200, choices=CHOICES_CITY, default='Saint-Petersburg', verbose_name='Город')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
@@ -37,7 +37,7 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
     def __str__(self):
-        return self.order_number
+        return str(self.order_number)
 
     def get_total_cost(self):
         total_cost = 0
@@ -49,8 +49,8 @@ class Order(models.Model):
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Заказ', related_name='OrderProduct')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
+    quantity = models.PositiveIntegerField(default=1, verbose_name='Количество')
 
     def get_cost(self):
         return int(self.quantity) * float(self.price)
