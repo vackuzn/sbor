@@ -1,20 +1,35 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from main.models import Product
 
 
 class Order(models.Model):
+    CHOICES_CITY = [
+        ('spb', 'Санкт-Петербург'),
+        ('psh', 'Пушкин'),
+        ('gatchina', 'Гатчина'),
+        ('vsecologsk', 'Всеволожск'),
+    ]
+
+    CHOICES_STATUS = [
+        ('order_is_made', 'Заказ оформлен'),
+        ('order_is_paid', 'Заказ оплачен'),
+        ('order_is_fulfilled', 'Заказ выполнен'),
+    ]
+
     order_number = models.IntegerField(unique=True, verbose_name='Номер заказа')
-    user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT, blank=True, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, verbose_name='Пользователь')
     first_name = models.CharField(max_length=200, verbose_name='Имя')
     last_name = models.CharField(max_length=200, verbose_name='Фамилия')
-    phone = models.IntegerField(verbose_name='Телефон')
-    email = models.EmailField()
+    phone = models.IntegerField(verbose_name='Адрес электронной почты')
+    email = models.EmailField(verbose_name='Телефон')
     address = models.TextField(verbose_name='Адрес')
-    city = models.CharField(max_length=200)
+    city = models.CharField(max_length=200, choices=CHOICES_CITY, default='Saint-Petersburg', verbose_name='Город')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     total_price = models.IntegerField(verbose_name='Общая цена')
+    status = models.CharField(max_length=200, choices=CHOICES_STATUS, default='order_is_made', verbose_name='Статус')
 
     class Meta:
         ordering = ('-created',)

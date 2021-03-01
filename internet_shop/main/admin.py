@@ -12,7 +12,6 @@ class CategoryAdmin(admin.ModelAdmin):
     fields = ('title', 'is_published', 'views', 'slug', 'photo', 'get_photo')
     readonly_fields = ('views', 'get_photo')
 
-
     def get_photo(self, obj):
         if obj.photo:
             res = mark_safe(f'<img src="{obj.photo.url}" width="75">')

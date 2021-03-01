@@ -4,11 +4,85 @@
 
 {% load static %}
 
-{% block for_connect_another %}<link rel="stylesheet" href="{% static 'order_and_pay/css/order.css' %}">{% endblock%}
+{% block for_connect_another %}
+    <link rel="stylesheet" href="{% static 'order_and_pay/css/order.css' %}">
+        
+{% endblock%}
 
 
 {% block content %} 
 
 <h2>Сделать заказ</h2>
+
+{% if not request.user.is_authenticated %}
+    <div class='message_log_in'>Для того, что в дальнейшего просмотривать заказы в личном кабинете, сейчас желательно авторизоваться: <a href="{% url 'login' %}">войти</a></div>
+{% endif %}
+
+
+
+<div class="order">
+    <h3>Ваш заказ</h3>
+    <br>
+    <h4>Номер заказа: {{order_number}}</h4>
+    <table class="cart_table">
+        <tr>
+            <th>Фото</th>
+            <th>Артикул</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Удалить</th> 
+            <th>Общая цена</th>
+            
+        </tr>
+
+        {% for item in cart %}
+            <tr>
+                <td><a href=" {{ item.product.get_absolute_url }}"><img src=" {{ item.product.main_image.url }}" alt=""></a></td>
+                <td>{{ item.product.article }}</td>
+                <td><a href=" {{ item.product.get_absolute_url }}">{{ item.product.title }}</a></td>
+                <td>{{ item.product.price_unit }}</td>
+                <td>{{ item.quantity }}</td>
+                <td><a href="/cart/cart_dell_product/{{item.product.id}}">Удалить</a></td> 
+                <td>{{ item.total_price }}</td>   
+            </tr>
+        {% endfor %}
+            <tr>
+                <td colspan="6">Общая стоимость</td>
+                <td>{{cart.get_total_price}}</td>
+            </tr>
+    </table>
+
+    <br>
+
+    <h3>Пожалуйста, заполните форму</h3>
+    
+    <form method="POST" class="cart_form">
+        {% csrf_token %}
+
+        {% for item in form %}
+            <div>{{item.label_tag}}</div>
+            <div>{{item}}</div>
+        {% endfor %}
+        <br>
+        <button type="submit" class="button">Оплатить</button>
+    </form>
+
+    <!--     
+    <style>.tinkoffPayRow{display:block;margin:1%;width:160px;}</style>
+    <script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js"></script>
+    <form name="TinkoffPayForm" onsubmit="pay(this); return false;">
+        <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="TinkoffBankTest">
+        <input class="tinkoffPayRow" type="hidden" name="frame" value="true">
+        <input class="tinkoffPayRow" type="hidden" name="language" value="ru">
+        <input class="tinkoffPayRow" type="text" placeholder="Сумма заказа" name="amount" required>
+        <input class="tinkoffPayRow" type="text" placeholder="Номер заказа" name="order">
+        <input class="tinkoffPayRow" type="text" placeholder="Описание заказа" name="description">
+        <input class="tinkoffPayRow" type="text" placeholder="ФИО плательщика" name="name">
+        <input class="tinkoffPayRow" type="text" placeholder="E-mail" name="email">
+        <input class="tinkoffPayRow" type="text" placeholder="Контактный телефон" name="phone">
+        <input class="tinkoffPayRow" type="submit" value="Оплатить">
+    </form> -->
+</div>
 
 {% endblock%}

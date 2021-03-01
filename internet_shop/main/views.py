@@ -5,7 +5,7 @@ from django.db.models import Count, F
 from django.core.paginator import Paginator
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
-
+from django.urls import reverse_lazy
 
 def main_page(request):
     products = Product.objects.order_by('-views')[:4]
