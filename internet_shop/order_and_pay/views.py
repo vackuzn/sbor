@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from order_and_pay.forms import OrderForm
 from order_and_pay.models import Order
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import User, AnonymousUser
 from django.urls import reverse
 
 from cart.cart import Cart
@@ -88,3 +88,10 @@ def search_order(request):
     return render(request, 'order_and_pay/search_order.html')
 
 
+def my_order(request):
+    if request.user.is_authenticated:
+        user = request.user
+        orders = user.user_order.all()
+        context = {'orders': orders}
+        return render(request, 'order_and_pay/my_orders.html', context)
+    return HttpResponseRedirect(reverse('login'))

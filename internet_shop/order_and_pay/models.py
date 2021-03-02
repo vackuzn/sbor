@@ -19,7 +19,7 @@ class Order(models.Model):
     ]
 
     order_number = models.IntegerField(unique=True, verbose_name='Номер заказа')
-    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, related_name='user_order', verbose_name='Пользователь')
     first_name = models.CharField(max_length=200, verbose_name='Имя')
     last_name = models.CharField(max_length=200, verbose_name='Фамилия')
     phone = models.IntegerField(verbose_name='Телефон')

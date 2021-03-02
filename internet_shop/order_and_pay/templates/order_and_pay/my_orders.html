@@ -1,24 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %} Оплата {% endblock %}
+{% block title %} Мои заказы {% endblock %}
 
 {% load static %}
 
 {% block for_connect_another %}
-    <link rel="stylesheet" href="{% static 'order_and_pay/css/search_order.css' %}">
+    <link rel="stylesheet" href="{% static 'order_and_pay/css/my_orders.css' %}">
         
 {% endblock%}
 
 
 {% block content %}
 
-<h2>Поиск заказа</h2>
-<form method="POST" class="search_order">
-    {% csrf_token %}
-    <input type="number" name="order_number">
-    <button type="submit" class="button">Поиск заказа</button>
-</form>
-
+<h2>Мои заказы</h2>
 <br>
 {% if orders %}
     <table class="search_order_table">
