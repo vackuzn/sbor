@@ -1,0 +1,23 @@
+.message_order_not_paid {
+    margin: 20px 0;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    color: red;
+
+}
+.view_order_table {
+    width: 100%;
+}
+
+.view_order_table img {
+    width: 100px;
+}
+
+table, td, th {
+    border: 1px solid grey;
+    text-align: center;
+}
+

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} Оплата {% endblock %}
+
+{% load static %}
+
+{% block for_connect_another %}
+    <link rel="stylesheet" href="{% static 'order_and_pay/css/pay.css' %}">
+        
+{% endblock%}
+
+
+{% block content %} 
+
+<h2>Оплата</h2>
+<br>
+<h2>Номер заказа: {{order.order_number}} руб.</h2>
+<h2>Сумму заказа: {{order.total_price}} руб.</h2>
+<br>
+<h3> Здесь будет форма оплаты банка </h3>
+    <!--     
+    <style>.tinkoffPayRow{display:block;margin:1%;width:160px;}</style>
+    <script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js"></script>
+    <form name="TinkoffPayForm" onsubmit="pay(this); return false;">
+        <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="TinkoffBankTest">
+        <input class="tinkoffPayRow" type="hidden" name="frame" value="true">
+        <input class="tinkoffPayRow" type="hidden" name="language" value="ru">
+        <input class="tinkoffPayRow" type="text" placeholder="Сумма заказа" name="amount" required>
+        <input class="tinkoffPayRow" type="text" placeholder="Номер заказа" name="order">
+        <input class="tinkoffPayRow" type="text" placeholder="Описание заказа" name="description">
+        <input class="tinkoffPayRow" type="text" placeholder="ФИО плательщика" name="name">
+        <input class="tinkoffPayRow" type="text" placeholder="E-mail" name="email">
+        <input class="tinkoffPayRow" type="text" placeholder="Контактный телефон" name="phone">
+        <input class="tinkoffPayRow" type="submit" value="Оплатить">
+    </form> -->
+
+
+<form method="POST" class="order_pay_form">
+    {% csrf_token %}
+    <input type="hidden" name="order.total_price" value="{{order.total_price}}">
+    <br>
+    <button type="submit" class="button">Временная кнопка. Допустим оплатили</button>
+</form>
+
+{% endblock%}

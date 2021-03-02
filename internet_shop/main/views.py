@@ -58,7 +58,6 @@ def product_card(request, pk):
         cart = Cart(request)
         form = CartAddProductForm(request.POST)
         if form.is_valid():
-            print("yes")
             cart.add(product=product, quantity=form.cleaned_data['quantity'])
 
     return render(request, 'main/product_card.html', context)

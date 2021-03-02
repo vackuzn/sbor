@@ -23,7 +23,7 @@ def _get_random_order_number():
     return order_number
 
 
-def order(request):
+def make_order(request):
     cart = Cart(request)
     order_number = _get_random_order_number()
 
@@ -32,8 +32,8 @@ def order(request):
         # создание и сохранение общего заказа в БД
         if form.is_valid():
             new_order = form.save(commit=False)
-            # номер заказа
-            new_order.order_number = order_number
+            # order number
+            new_order.order_number = request.POST.get('order_number')
             # user
             if request.user != AnonymousUser():
                 new_order.user = request.user
@@ -52,12 +52,30 @@ def order(request):
                 )
 
             cart.clear()
-            return HttpResponseRedirect(reverse('main_page'))
+            return HttpResponseRedirect(reverse('pay_order', args=[new_order.order_number]))
 
     else:
         form = OrderForm()
 
     context = {'form': form, 'order_number': order_number}
-    return render(request, 'order_and_pay/order.html', context)
+    return render(request, 'order_and_pay/make_order.html', context)
+
+
+def view_order(request, order_number):
+    order = Order.objects.get(order_number=order_number)
+    products = order.OrderProduct.all()
+    context = {'order': order, 'products': products}
+    return render(request, 'order_and_pay/view_order.html', context)
+
+
+def pay_order(request, order_number):
+    order = Order.objects.get(order_number=order_number)
+    if request.method == "POST":
+        order.status = 'order_is_paid'
+        order.save()
+        return HttpResponseRedirect(reverse('view_order', args=[order_number]))
+
+    context = {'order': order}
+    return render(request, 'order_and_pay/pay.html', context)
 
 

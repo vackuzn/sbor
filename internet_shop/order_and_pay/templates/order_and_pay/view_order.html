@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %} Оплата {% endblock %}
+
+{% load static %}
+
+{% block for_connect_another %}
+    <link rel="stylesheet" href="{% static 'order_and_pay/css/view_order.css' %}">
+        
+{% endblock%}
+
+
+{% block content %} 
+<h2>Страница заказа</h2>
+<br>
+<h3>Номер заказа: {{order.order_number}}</h3>
+<h3>Статус заказа: 
+    {% if order.status == 'order_is_paid' %} Заказ оплачен
+    {% elif order.status == 'order_is_made' %} Заказ оформлен, но не оплачен
+    {% elif order.status == 'order_is_fulfilled' %} Заказ исполнен
+    {% endif %}
+</h3>
+<h3>Цена заказа: {{order.total_price}} руб.</h3>
+<br>
+{% if order.status == 'order_is_made' %}
+    <div class='message_order_not_paid'>Заказ не оплачен. <a href="{% url 'pay_order' order_number=order.order_number %}">Оплатить</a></div>
+{% endif %}
+<br>
+<h3>Элементы заказа:</h3>
+<table class="view_order_table">
+    <tr>
+        <th>Фото</th>
+        <th>Артикул</th>
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Общая цена</th>
+    </tr>
+
+    {% for item in products %}
+        <tr>
+            <td><a href=" {{ item.product.get_absolute_url }}"><img src=" {{ item.product.main_image.url }}" alt=""></a></td>
+            <td>{{ item.product.article }}</td>
+            <td><a href=" {{ item.product.get_absolute_url }}">{{ item.product.title }}</a></td>
+            <td>{{ item.product.price_unit }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.get_cost }}</td>   
+        </tr>
+    {% endfor %}
+
+</table>
+
+
+
+
+
+{% endblock%}
