@@ -79,3 +79,12 @@ def pay_order(request, order_number):
     return render(request, 'order_and_pay/pay.html', context)
 
 
+def search_order(request):
+    if request.method == 'POST':
+        if request.POST.get('order_number'):
+            orders = Order.objects.filter(order_number=request.POST.get('order_number'))
+            context = {'orders': orders}
+            return render(request, 'order_and_pay/search_order.html', context)
+    return render(request, 'order_and_pay/search_order.html')
+
+

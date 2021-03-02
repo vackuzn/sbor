@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %} Оплата {% endblock %}
+
+{% load static %}
+
+{% block for_connect_another %}
+    <link rel="stylesheet" href="{% static 'order_and_pay/css/search_order.css' %}">
+        
+{% endblock%}
+
+
+{% block content %} 
+
+<h2>Поиск заказа</h2>
+<form method="POST" class="search_order">
+    {% csrf_token %}
+    <input type="number" name="order_number">
+    <button type="submit" class="button">Поиск заказа</button>
+</form>
+
+<br>
+{% if orders %}
+    <table class="search_order_table">
+        <tr>
+            <th>Номер заказа</th>
+            <th>Дата создания</th>
+            <th>Цена</th>
+            <th>Статус</th>           
+        </tr>
+
+        {% for item in orders %}
+            <tr>
+                <td><a href=" {% url 'view_order' order_number=item.order_number %}">{{item.order_number}}</a></td>
+                <td>{{ item.created }}</td>
+                <td>{{ item.total_price }} руб.</td>
+                <td>{{ item.status }}</td>   
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+
+{% endblock%}
