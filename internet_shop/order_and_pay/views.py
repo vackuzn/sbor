@@ -4,15 +4,13 @@ from order_and_pay.models import Order
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User, AnonymousUser
 from django.urls import reverse
+from internet_shop.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail
 
 from cart.cart import Cart
 from order_and_pay.models import OrderProduct
 
 import random
-
-
-def _send_email(order_number, total_price, first_name, last_name, address):
-    pass
 
 
 def _get_random_order_number():
@@ -51,7 +49,18 @@ def make_order(request):
                     quantity=product['quantity'],
                 )
 
+            # отправка email
+            subject = 'Новый заказ {}'.format(str(new_order.order_number))
+            message = 'Заказ № {}, \nСтоимость: {} руб., \nСтатус: {},\nСсылка: {}'\
+                .format(str(new_order.order_number),
+                        str(new_order.total_price),
+                        'Заказ оформлен',
+                        request.build_absolute_uri(reverse('view_order', args=(new_order.order_number, ))))
+            send_mail(subject, message, EMAIL_HOST_USER, [EMAIL_HOST_USER], fail_silently=False)
+
+            # очистить корзину
             cart.clear()
+
             return HttpResponseRedirect(reverse('pay_order', args=[new_order.order_number]))
 
     else:
@@ -73,6 +82,16 @@ def pay_order(request, order_number):
     if request.method == "POST":
         order.status = 'order_is_paid'
         order.save()
+
+        # отправка email
+        subject = 'Заказ {} оплачен'.format(str(order.order_number))
+        message = 'Заказ № {}, \nСтоимость: {} руб., \nСтатус: {},\nСсылка: {}' \
+            .format(str(order.order_number),
+                    str(order.total_price),
+                    'Заказ оплачен',
+                    request.build_absolute_uri(reverse('view_order', args=(order.order_number,))))
+        send_mail(subject, message, EMAIL_HOST_USER, [EMAIL_HOST_USER], fail_silently=False)
+
         return HttpResponseRedirect(reverse('view_order', args=[order_number]))
 
     context = {'order': order}

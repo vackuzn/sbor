@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from main.models import Product
+from django.urls import reverse
 
 
 class Order(models.Model):
@@ -44,6 +45,9 @@ class Order(models.Model):
         for order_product in self.OrderProduct.all():
             total_cost += order_product.get_cost()
         return total_cost
+
+    def get_absolute_url(self):
+        return reverse('view_order', args=[self.order_number])
 
 
 class OrderProduct(models.Model):

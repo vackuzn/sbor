@@ -22,7 +22,7 @@
         <div class="category_product">
 
             <div class="articl">Артикул: {{ product.article }}</div>
-            <a href="/product/{{ product.pk }}">
+            <a href="{{ product.get_absolute_url }}">
                 <div class="product_img"><img src="{{ product.main_image.url }}" alt=""></div>
                 <div class="product_title">{{product.title}}</div>
             </a>

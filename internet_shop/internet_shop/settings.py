@@ -140,3 +140,10 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# настройки почтового сервера для отправки писем
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST_USER = 'muctep.pobot@mail.ru'
+EMAIL_HOST_PASSWORD = 'пять звездочек'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
