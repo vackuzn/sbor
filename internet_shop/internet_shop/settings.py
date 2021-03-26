@@ -25,11 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'n1k*jbu1w107&d3+nr-ki7s8**)$huyfu7o3bkn@_49^b!0l*a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 CART_SESSION_ID = 'cart'  # Это ключ, который мы собираемся использовать для хранения корзины в сессии пользователя.
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cb06943.tmweb.ru']
 
 
 # Application definition
@@ -126,24 +126,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
+# Static/media
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'internet_shop/static'),
+#    os.path.join(BASE_DIR, 'internet_shop/main/static'),
+#    os.path.join(BASE_DIR, 'internet_shop/user_and_customer/static'),
+#    os.path.join(BASE_DIR, 'internet_shop/cart/static'),
+#    os.path.join(BASE_DIR, 'internet_shop/order_and_pay/static'),
+# ]
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+
+
+STATIC_ROOT = '/home/c/cb06943/public_html/static/'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'internet_shop/static'),
-    os.path.join(BASE_DIR, 'internet_shop/main/static'),
-    os.path.join(BASE_DIR, 'internet_shop/user_and_customer/static'),
-    os.path.join(BASE_DIR, 'internet_shop/cart/static'),
-    os.path.join(BASE_DIR, 'internet_shop/order_and_pay/static'),
-]
 
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/home/c/cb06943/public_html/media'
 MEDIA_URL = '/media/'
 
 # настройки почтового сервера для отправки писем
 
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_HOST_USER = 'muctep.pobot@mail.ru'
-EMAIL_HOST_PASSWORD = 'пять звездочек'
+EMAIL_HOST = 'smtp.timeweb.ru'
+EMAIL_HOST_USER = 'info@cb06943.tmweb.ru'
+EMAIL_HOST_PASSWORD = '2W56NGZVDG'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
