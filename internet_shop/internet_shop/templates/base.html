@@ -46,9 +46,9 @@
 
                 <div class="basket">
                     {% if cart|length > 0 %}
-                        <a href="{% url 'cart' %}">Ведро:</a> {{ cart|length }} тов.
+                        <a href="{% url 'cart' %}">Корзина:</a> {{ cart|length }} тов.
                     {% else %}
-                        Ведро пустое
+                        Корзина пустая
                     {% endif %}
 
                 </div>
