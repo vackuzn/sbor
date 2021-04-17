@@ -1,0 +1,39 @@
+
+.message_log_in {
+    margin: 20px 0;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    color: red;
+
+}
+
+.cart_table {
+    width: 100%;
+}
+
+.cart_table img {
+    width: 100px;
+}
+
+table, td, th {
+    border: 1px solid grey;
+    text-align: center;
+}
+
+.order{
+    width: 600px;
+    margin: auto;
+    
+}
+
+.order div {
+    width: 100%;
+    
+}
+
+.order .form_field {
+    width: 100%;
+}

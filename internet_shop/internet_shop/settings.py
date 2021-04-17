@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from django.core.management.utils import get_random_secret_key
 import os
 
 
@@ -22,15 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'n1k*jbu1w107&d3+nr-ki7s8**)$huyfu7o3bkn@_49^b!0l*a'
+SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 CART_SESSION_ID = 'cart'  # Это ключ, который мы собираемся использовать для хранения корзины в сессии пользователя.
 
-ALLOWED_HOSTS = ['cb06943.tmweb.ru']
-
+ALLOWED_HOSTS = ['cb06943.tmweb.ru','127.0.0.1']
 
 # Application definition
 
@@ -129,23 +129,35 @@ USE_TZ = True
 
 # Static/media
 
-# STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'internet_shop/static'),
-#    os.path.join(BASE_DIR, 'internet_shop/main/static'),
-#    os.path.join(BASE_DIR, 'internet_shop/user_and_customer/static'),
-#    os.path.join(BASE_DIR, 'internet_shop/cart/static'),
-#    os.path.join(BASE_DIR, 'internet_shop/order_and_pay/static'),
-# ]
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
+
+def is_dev():
+    if os.path.exists(f'{os.path.expanduser("~")}/public_html/static/'):
+        return False
+    return True
 
 
-STATIC_ROOT = '/home/c/cb06943/public_html/static/'
+def get_static_root():
+    if is_dev():
+        return os.path.join(BASE_DIR, 'static')
+    return f'{os.path.expanduser("~")}/public_html/static/'
+
+
+def get_media_root():
+    if is_dev():
+        return os.path.join(BASE_DIR, 'media')
+    return f'{os.path.expanduser("~")}/public_html/media/'
+
+
+STATIC_ROOT = get_static_root()
 STATIC_URL = '/static/'
-
-MEDIA_ROOT = '/home/c/cb06943/public_html/media'
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'internet_shop/static'),
+   os.path.join(BASE_DIR, 'main/static'),
+   os.path.join(BASE_DIR, 'user_and_customer/static'),
+   os.path.join(BASE_DIR, 'cart/static'),
+   os.path.join(BASE_DIR, 'order_and_pay/static'),
+]
+MEDIA_ROOT = get_media_root()
 MEDIA_URL = '/media/'
 
 # настройки почтового сервера для отправки писем

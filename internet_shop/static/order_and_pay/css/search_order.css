@@ -1,0 +1,9 @@
+.search_order_table {
+    width: 100%;
+}
+
+
+table, td, th {
+    border: 1px solid grey;
+    text-align: center;
+}

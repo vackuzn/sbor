@@ -1,0 +1,51 @@
+
+h4 {
+    padding: 5px;
+}
+
+.main_products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;   
+}
+
+.main_product {
+    width: 23.9%;
+    
+    margin: 0px 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main_product .articl, .prices {
+    color: gray;
+}
+
+.main_product a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.main_product a:hover {
+    color: blue;
+}
+
+.product_img {
+    text-align: center;
+}
+
+.product_img img {
+    height: 150px;
+}
