@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
+from .settings_dependencies import is_dev,get_media_root,get_static_root
 import os
 
 
@@ -26,11 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = is_dev(BASE_DIR)
 
 CART_SESSION_ID = 'cart'  # Это ключ, который мы собираемся использовать для хранения корзины в сессии пользователя.
 
-ALLOWED_HOSTS = ['cb06943.tmweb.ru','127.0.0.1']
+ALLOWED_HOSTS = ['sbor-market.ru','sbx.cb06943.tmweb.ru','cb06943.tmweb.ru','127.0.0.1']
 
 # Application definition
 
@@ -128,27 +129,7 @@ USE_TZ = True
 
 
 # Static/media
-
-
-def is_dev():
-    if os.path.exists(f'{os.path.expanduser("~")}/public_html/static/'):
-        return False
-    return True
-
-
-def get_static_root():
-    if is_dev():
-        return os.path.join(BASE_DIR, 'static')
-    return f'{os.path.expanduser("~")}/public_html/static/'
-
-
-def get_media_root():
-    if is_dev():
-        return os.path.join(BASE_DIR, 'media')
-    return f'{os.path.expanduser("~")}/public_html/media/'
-
-
-STATIC_ROOT = get_static_root()
+STATIC_ROOT = get_static_root(BASE_DIR)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'internet_shop/static'),
@@ -157,7 +138,7 @@ STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'cart/static'),
    os.path.join(BASE_DIR, 'order_and_pay/static'),
 ]
-MEDIA_ROOT = get_media_root()
+MEDIA_ROOT = get_media_root(BASE_DIR)
 MEDIA_URL = '/media/'
 
 # настройки почтового сервера для отправки писем

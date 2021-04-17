@@ -6,6 +6,7 @@ HOST_FOLDER="$BASE_FOLDER/public_html"
 VENV_FOLDER="$BASE_FOLDER/venvs/prod"
 TEMP_REPO_FOLDER="/tmp/deploy"
 PROJECT_FOLDER="internet_shop"
+BRANCH_NAME=${1:-master}
 
 # Functions
 print () {
@@ -19,9 +20,9 @@ rm -rf $VENV_FOLDER
 python3 "$BASE_FOLDER/virtualenv/virtualenv.py" $VENV_FOLDER
 source $VENV_FOLDER/bin/activate
 
-print "Cloning repo"
+print "Cloning repo, branch $BRANCH_NAME"
 rm -rf $TEMP_REPO_FOLDER
-git clone https://github.com/o-seer/sbormarket.git $TEMP_REPO_FOLDER
+git clone -b $BRANCH_NAME https://github.com/o-seer/sbormarket.git $TEMP_REPO_FOLDER
 
 print "Installing dependencies"
 pip install -r $TEMP_REPO_FOLDER/requirements.txt
