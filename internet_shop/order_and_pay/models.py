@@ -19,6 +19,7 @@ class Order(models.Model):
         ('order_is_fulfilled', 'Заказ выполнен'),
     ]
 
+    id = models.AutoField(primary_key=True)
     order_number = models.IntegerField(unique=True, verbose_name='Номер заказа')
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, related_name='user_order', verbose_name='Пользователь')
     first_name = models.CharField(max_length=200, verbose_name='Имя')
@@ -51,6 +52,7 @@ class Order(models.Model):
 
 
 class OrderProduct(models.Model):
+    id = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Заказ', related_name='OrderProduct')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')

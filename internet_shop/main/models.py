@@ -3,6 +3,7 @@ from django.urls import reverse
 
 
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=150, verbose_name='Название категории')
     slug = models.SlugField(max_length=150, unique=True, verbose_name='Слаг')
     photo = models.ImageField(upload_to='category_photos/', verbose_name='Фото')
@@ -19,6 +20,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=150, verbose_name='Название')
     article = models.IntegerField(verbose_name='Артикул', unique=True)
     description = models.TextField(verbose_name='Описание', blank=True)
@@ -44,6 +46,7 @@ class Product(models.Model):
 
 
 class ImageGallery(models.Model):
+    id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Товар')
     additional_picture = models.ImageField(verbose_name='Дополнительное изображение', upload_to='product_photo/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
