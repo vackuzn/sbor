@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from django.core.management.utils import get_random_secret_key
-from .settings_dependencies import is_dev,get_media_root,get_static_root
+from .settings_dependencies import is_dev, get_media_root, get_static_root, get_secret_key, get_email_conf
 import os
 
 
@@ -24,14 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_random_secret_key()
+SECRET_KEY = get_secret_key(BASE_DIR)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = is_dev(BASE_DIR)
 
 CART_SESSION_ID = 'cart'  # Это ключ, который мы собираемся использовать для хранения корзины в сессии пользователя.
 
-ALLOWED_HOSTS = ['sbor-market.ru','sbx.cb06943.tmweb.ru','cb06943.tmweb.ru','127.0.0.1']
+ALLOWED_HOSTS = ['sbor-market.ru', 'sbx.cb06943.tmweb.ru', 'cb06943.tmweb.ru', '127.0.0.1']
 
 # Application definition
 
@@ -142,9 +141,9 @@ MEDIA_ROOT = get_media_root(BASE_DIR)
 MEDIA_URL = '/media/'
 
 # настройки почтового сервера для отправки писем
-
-EMAIL_HOST = 'smtp.timeweb.ru'
-EMAIL_HOST_USER = 'info@cb06943.tmweb.ru'
-EMAIL_HOST_PASSWORD = '2W56NGZVDG'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
+email_conf = get_email_conf(BASE_DIR)
+EMAIL_HOST = email_conf['EMAIL_HOST']
+EMAIL_HOST_USER = email_conf['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = email_conf['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = email_conf['EMAIL_PORT']
+EMAIL_USE_SSL = email_conf['EMAIL_USE_SSL']
