@@ -50,10 +50,12 @@
 
 .product_img {
     text-align: center;
+    
 }
 
 .product_img img {
     height: 150px;
+    max-width: 100%;
 }
 
 .cart_form {
