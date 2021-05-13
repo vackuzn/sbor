@@ -19,7 +19,7 @@ def user_register(request):
                 phone=customer_phone
             )
             login(request, new_user)
-            return redirect('success')
+            return redirect('main_page')
     else:
         form = UserRegisterForm()
 
@@ -33,7 +33,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('success')
+            return redirect('main_page')
         else:
             messages.error(request, 'Ошибка авторизации')
     else:
@@ -45,6 +45,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('main_page')
+
 
 def success(request):
     return render(request, 'user_and_customer/success.html')
