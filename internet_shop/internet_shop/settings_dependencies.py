@@ -44,3 +44,10 @@ def get_allowed_hosts(base_dir: str) -> list:
     with open(config_file, 'r') as config:
         allowed_hosts = json.load(config)['ALLOWED_HOSTS']
         return allowed_hosts
+
+
+def get_secure_ssl_redirect(base_dir: str) -> bool:
+    config_file = os.path.join(base_dir, '..', 'config.json')
+    with open(config_file, 'r') as config:
+        secure_ssl_redirect = json.load(config)['SECURE_SSL_REDIRECT']
+        return secure_ssl_redirect
