@@ -25,12 +25,15 @@ body {
 .logo img {
     width: 100px; height: 100px;
     flex-basis: 10%;
+
 }
 
 .links {
-    flex-basis: 45%;
+    flex-basis: 55%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+
+
 }
 
 .links a {
@@ -45,7 +48,8 @@ body {
 .user_and_basket{
     flex-basis: 35%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+
     
 }
 
@@ -58,6 +62,7 @@ body {
 }
 
 .user,  .basket {
+    margin-left: 5px;
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
