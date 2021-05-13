@@ -2,10 +2,28 @@ from django.db import models
 from django.urls import reverse
 
 
+class GlobalCategory(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=150, verbose_name='Название категории')
+    slug = models.SlugField(max_length=150, unique=True, verbose_name='Слаг')
+    photo = models.ImageField(upload_to='category_photos/', verbose_name='Фото')
+    is_published = models.BooleanField(default=True, verbose_name='Публикация')
+    views = models.IntegerField(default=0, verbose_name='Просмотры')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Глобальная категория"
+        verbose_name_plural = "Глобальные категории"
+        ordering = ['title']
+
+
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=150, verbose_name='Название категории')
     slug = models.SlugField(max_length=150, unique=True, verbose_name='Слаг')
+    global_category = models.ForeignKey(GlobalCategory, on_delete=models.CASCADE, verbose_name='Глобальная категория')
     photo = models.ImageField(upload_to='category_photos/', verbose_name='Фото')
     is_published = models.BooleanField(default=True, verbose_name='Публикация')
     views = models.IntegerField(default=0, verbose_name='Просмотры')

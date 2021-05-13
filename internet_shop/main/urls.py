@@ -3,7 +3,8 @@ from main.views import *
 
 urlpatterns = [
     path('', main_page, name='main_page'),
-    path('category/', categories, name='categories'),
+    path('global_category/', global_categories, name='global_categories'),
+    path('global_category/<slug>', global_category, name='global_category'),
     path('category/<slug>', category, name='category'),
     path('product/<int:pk>', product_card, name='product_card')
 ]

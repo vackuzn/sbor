@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import Category, Product
+from main.models import GlobalCategory, Category, Product
 from django.db.models import Count, F
 from django.core.paginator import Paginator
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
 from django.urls import reverse_lazy
+
 
 def main_page(request):
     products = Product.objects.order_by('-views')[:4]
@@ -13,9 +14,17 @@ def main_page(request):
     return render(request, 'main/main_page.html', context)
 
 
-def categories(request):
-    all_categories = Category.objects.annotate(x=Count('product')).filter(x__gt=0)
-    context = {'all_categories': all_categories}
+def global_categories(request):
+    all_global_categories = GlobalCategory.objects.annotate(x=Count('category')).filter(x__gt=0)
+    print(all_global_categories)
+    context = {'all_categories': all_global_categories}
+    return render(request, 'main/global_categories.html', context)
+
+
+def global_category(request, slug):
+    global_category = GlobalCategory.objects.get(slug=slug)
+    all_categories = Category.objects.filter(global_category=global_category, is_published=True)
+    context = {'all_categories': all_categories, 'global_category': global_category}
     return render(request, 'main/categories.html', context)
 
 

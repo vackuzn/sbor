@@ -3,13 +3,32 @@ from main.models import *
 from django.utils.safestring import mark_safe
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class GlobalCategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'is_published', 'views', 'photo', 'get_photo')
     list_display_links = ('id', 'title')
     search_fields = ('id', 'title')
     list_editable = ('is_published',)
 
     fields = ('title', 'is_published', 'views', 'slug', 'photo', 'get_photo')
+    readonly_fields = ('views', 'get_photo')
+
+    def get_photo(self, obj):
+        if obj.photo:
+            res = mark_safe(f'<img src="{obj.photo.url}" width="75">')
+        else:
+            res = "нет картинки"
+        return res
+
+    get_photo.short_description = 'Миниатюра'
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'global_category', 'is_published', 'views', 'photo', 'get_photo')
+    list_display_links = ('id', 'title')
+    search_fields = ('id', 'title')
+    list_editable = ('is_published', 'global_category')
+
+    fields = ('title', 'is_published', 'global_category', 'views', 'slug', 'photo', 'get_photo')
     readonly_fields = ('views', 'get_photo')
 
     def get_photo(self, obj):
@@ -58,6 +77,7 @@ class ProductAdmin(admin.ModelAdmin):
     get_photo.short_description = 'Фото'
 
 
+admin.site.register(GlobalCategory, GlobalCategoryAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 

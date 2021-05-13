@@ -3,20 +3,19 @@
 {% block title %} Категории {% endblock %}
 
 {% load static %}
-{% block for_connect_another %}<link rel="stylesheet" href="{% static 'main/css/categories.css' %}">{% endblock%}
+{% block for_connect_another %}<link rel="stylesheet" href="{% static 'main/css/global_categories.css' %}">{% endblock%}
 
 {% block content %} 
 <br>
 
-<h2>{{ global_category }}</h2>
-<br>
+<h2>Категории</h2>
 
-<div class="categories_categories">
+<div class="global_categories_categories">
     
   {% for category in all_categories %}
     
-    <div class="categories_category">
-        <a href="/category/{{ category.slug }}">
+    <div class="global_categories_category">
+        <a href="/global_category/{{ category.slug }}">
         <div>
             <img src="{{ category.photo.url }}" alt="">
         </div>
