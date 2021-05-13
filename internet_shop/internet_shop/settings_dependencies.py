@@ -37,3 +37,10 @@ def get_email_conf(base_dir: str) -> dict:
     with open(config_file, 'r') as config:
         email_conf = json.load(config)['EMAIL_CONF']
         return email_conf
+
+
+def get_allowed_hosts(base_dir: str) -> list:
+    config_file = os.path.join(base_dir, '..', 'config.json')
+    with open(config_file, 'r') as config:
+        allowed_hosts = json.load(config)['ALLOWED_HOSTS']
+        return allowed_hosts

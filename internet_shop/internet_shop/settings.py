@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from .settings_dependencies import is_dev, get_media_root, get_static_root, get_secret_key, get_email_conf
+from .settings_dependencies import is_dev, get_media_root, get_static_root, get_secret_key, get_email_conf, \
+    get_allowed_hosts
 import os
 
 
@@ -30,7 +31,7 @@ DEBUG = is_dev(BASE_DIR)
 
 CART_SESSION_ID = 'cart'  # Это ключ, который мы собираемся использовать для хранения корзины в сессии пользователя.
 
-ALLOWED_HOSTS = ['sbor-market.ru', 'sbx.cb06943.tmweb.ru', 'cb06943.tmweb.ru', '127.0.0.1']
+ALLOWED_HOSTS = get_allowed_hosts(BASE_DIR)
 
 # Application definition
 
