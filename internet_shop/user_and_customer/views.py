@@ -4,8 +4,12 @@ from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.contrib import messages
 
+from internet_shop.settings import EMAIL_HOST_USER, SEND_EMAIL_TO
+from django.core.mail import send_mail
+
 from user_and_customer.forms import *
 from user_and_customer.models import *
+
 
 
 def user_register(request):
@@ -16,8 +20,22 @@ def user_register(request):
             new_user = form.save()
             Customer.objects.create(
                 user=new_user,
-                phone=customer_phone
-            )
+                phone=customer_phone)
+
+            # отправка письма о регисрации нового пользователя владельцу сайта
+            subject = 'Новый пользователь {}'.format(str(new_user.username))
+            message = 'Зарегистрировался новый пользоатель: {}, \nEmail: {}., \nТелефон: {}'.format(str(new_user.username),
+                                                                           str(new_user.email),
+                                                                           str(customer_phone),
+                                                                           )
+            send_mail(subject, message, EMAIL_HOST_USER, [SEND_EMAIL_TO], fail_silently=False)
+
+            # отправка письма пользователю
+            subject = 'Вы успешно зарегистрировались на сайте https://sbor-market.ru'
+            message = '{}, спасибо за регистрацию на сайте https://sbor-market.ru'.format(str(new_user.username))
+            send_mail(subject, message, EMAIL_HOST_USER, [new_user.email], fail_silently=False)
+
+            # вход на сайт
             login(request, new_user)
             return redirect('main_page')
     else:

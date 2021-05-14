@@ -50,7 +50,6 @@ def make_order(request):
                 )
 
             # отправка email
-            print(new_order.email)
             subject = 'Новый заказ {}'.format(str(new_order.order_number))
             message = 'Заказ № {}, \nСтоимость: {} руб., \nСтатус: {},\nСсылка: {}'\
                 .format(str(new_order.order_number),
