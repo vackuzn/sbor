@@ -4,7 +4,7 @@ from order_and_pay.models import Order
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User, AnonymousUser
 from django.urls import reverse
-from internet_shop.settings import EMAIL_HOST_USER
+from internet_shop.settings import EMAIL_HOST_USER, SEND_EMAIL_TO
 from django.core.mail import send_mail
 
 from cart.cart import Cart
@@ -50,13 +50,15 @@ def make_order(request):
                 )
 
             # отправка email
+            print(new_order.email)
             subject = 'Новый заказ {}'.format(str(new_order.order_number))
             message = 'Заказ № {}, \nСтоимость: {} руб., \nСтатус: {},\nСсылка: {}'\
                 .format(str(new_order.order_number),
                         str(new_order.total_price),
                         'Заказ оформлен',
                         request.build_absolute_uri(reverse('view_order', args=(new_order.order_number, ))))
-            send_mail(subject, message, EMAIL_HOST_USER, [EMAIL_HOST_USER], fail_silently=False)
+            send_mail(subject, message, EMAIL_HOST_USER, [SEND_EMAIL_TO], fail_silently=False)
+            send_mail(subject, message, EMAIL_HOST_USER, [new_order.email], fail_silently=False)
 
             # очистить корзину
             cart.clear()
