@@ -10,7 +10,7 @@ class OrderForm(forms.ModelForm):
 
     first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'form_field'}))
     last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={'class': 'form_field'}))
-    phone = forms.IntegerField(label='Телефон', widget=forms.NumberInput(attrs={'class': 'form_field'}))
+    phone = forms.CharField(label='Телефон', max_length=20, widget=forms.TextInput(attrs={'class': 'form_field'}))
     email = forms.EmailField(label='Адрес электронной почты', widget=forms.EmailInput(attrs={'class': 'form_field'}))
     address = forms.CharField(label='Адрес доставки', widget=forms.TextInput(attrs={'class': 'form_field'}))
 

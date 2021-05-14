@@ -24,7 +24,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, related_name='user_order', verbose_name='Пользователь')
     first_name = models.CharField(max_length=200, verbose_name='Имя')
     last_name = models.CharField(max_length=200, verbose_name='Фамилия')
-    phone = models.IntegerField(verbose_name='Телефон')
+    phone = models.CharField(max_length=20)
     email = models.EmailField(verbose_name='Адрес электронной почты')
     address = models.TextField(verbose_name='Адрес')
     city = models.CharField(max_length=200, choices=CHOICES_CITY, default='Saint-Petersburg', verbose_name='Город')
