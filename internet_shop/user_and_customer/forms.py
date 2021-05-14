@@ -11,7 +11,7 @@ class UserAuthenticationForm(AuthenticationForm):
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(label='Электронная почта', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    phone = forms.IntegerField(label='Телефон', widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    phone = forms.CharField(label='Телефон', max_length=20, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 

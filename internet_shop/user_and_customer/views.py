@@ -11,7 +11,6 @@ from user_and_customer.forms import *
 from user_and_customer.models import *
 
 
-
 def user_register(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
@@ -24,7 +23,7 @@ def user_register(request):
 
             # отправка письма о регисрации нового пользователя владельцу сайта
             subject = 'Новый пользователь {}'.format(str(new_user.username))
-            message = 'Зарегистрировался новый пользоатель: {}, \nEmail: {}., \nТелефон: {}'.format(str(new_user.username),
+            message = 'Зарегистрировался новый пользователь: \nИмя: {}, \nEmail: {}., \nТелефон: {}'.format(str(new_user.username),
                                                                            str(new_user.email),
                                                                            str(customer_phone),
                                                                            )
