@@ -15,7 +15,7 @@ def main_page(request):
 
 
 def global_categories(request):
-    all_global_categories = GlobalCategory.objects.annotate(x=Count('category')).filter(x__gt=0)
+    all_global_categories = GlobalCategory.objects.filter(is_published=True)
     print(all_global_categories)
     context = {'all_categories': all_global_categories}
     return render(request, 'main/global_categories.html', context)

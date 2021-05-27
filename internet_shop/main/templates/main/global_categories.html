@@ -8,24 +8,37 @@
 {% block content %} 
 <br>
 
-<h2>Категории</h2>
+<h2>Категории товаров</h2>
 
-<div class="global_categories_categories">
-    
-  {% for category in all_categories %}
-    
-    <div class="global_categories_category">
-        <a href="/global_category/{{ category.slug }}">
-        <div>
-            <img src="{{ category.photo.url }}" alt="">
+<div class="col-xs-12">
+    <div class="global_categories">
+        <div class="hidden-xs hidden-sm hidden-md col-lg-3">
+            <div class="left_block">
+                {% for category in all_categories %}
+                <div class="global_categories_category">
+                    <a href="/global_category/{{ category.slug }}">
+                        <div><img src="{{ category.photo.url }}" alt=""></div>
+                        <div class="categories_title">{{category.title}}</div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        <div class="categories_title">{{category.title}}</div>
-        </a>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+            <div class="right_block">
+                {% for category in all_categories %}
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                    <div class="global_categories_category">
+                        <a href="/global_category/{{ category.slug }}">
+                            <div><img src="{{ category.photo.url }}" alt=""></div>
+                            <div class="categories_title">{{category.title}}</div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-
-  {% endfor %}
-
 </div>
-
 
 {% endblock%}
