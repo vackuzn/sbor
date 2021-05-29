@@ -59,12 +59,12 @@ class ImageGalleryInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ImageGalleryInline, ]
-    list_display = ('get_photo', 'title', 'article', 'is_published', 'category', 'price_unit', 'price_pack', 'views')
+    list_display = ('get_photo', 'title', 'article', 'is_published', 'category', 'price_unit', 'views')
     list_display_links = ('title', 'article')
     search_fields = ('title', 'article', 'category')
-    list_editable = ('price_unit', 'price_pack', 'is_published')
+    list_editable = ('price_unit', 'is_published')
     fields = ('get_photo', 'main_image', 'title', 'article', 'category', 'is_published', 'description', 'price_unit',
-              'price_pack', 'views', 'created_at', 'update_at')
+              'views', 'created_at', 'update_at')
     readonly_fields = ('get_photo', 'created_at', 'update_at', 'views')
 
     def get_photo(self, obj):

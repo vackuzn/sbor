@@ -45,7 +45,6 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     main_image = models.ImageField(verbose_name='Главное изображение', upload_to='product_photo/', blank=True)
     price_unit = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Цена за штуку')
-    price_pack = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Цена за упаковку', blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=True, verbose_name='Публикация')
