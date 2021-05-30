@@ -63,8 +63,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'article')
     search_fields = ('title', 'article', 'category')
     list_editable = ('price_unit', 'is_published', 'in_stock')
-    fields = ('get_photo', 'main_image', 'title', 'article', 'category', 'is_published', 'in_stock', 'description', 'price_unit',
-              'views', 'created_at', 'update_at')
+    fields = ('get_photo', 'main_image', 'title', 'article', 'category', 'is_published', 'in_stock', 'description',
+              'price_unit', 'unit_of_measurement', 'views', 'created_at', 'update_at')
     readonly_fields = ('get_photo', 'created_at', 'update_at', 'views')
 
     def get_photo(self, obj):

@@ -38,6 +38,15 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+
+    CHOICES_UNIT = [
+        ('piece', 'штуку'),
+        ('kilogram', 'килограмм'),
+        ('gram', 'грамм'),
+        ('centimeter', 'сантиметр'),
+        ('meter', 'метр'),
+    ]
+
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=150, verbose_name='Название')
     article = models.IntegerField(verbose_name='Артикул', unique=True)
@@ -45,6 +54,9 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     main_image = models.ImageField(verbose_name='Главное изображение', upload_to='product_photo/', blank=True)
     price_unit = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Цена за штуку')
+    unit_of_measurement = models.CharField(max_length=200,
+                                           choices=CHOICES_UNIT, default='piece',
+                                           verbose_name='Единица измерения')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=True, verbose_name='Публикация')
