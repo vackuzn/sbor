@@ -20,17 +20,23 @@
         <h5>{{product.description}}</h5> 
         {% endif %}
         <br>
-        <h4>Цена:</h4>
-        <h5>Цена за единицу: {{product.price_unit}}</h5>
+        
+        {% if product.in_stock %}
+            <h4>Цена:</h4>
+            <h5>Цена за единицу: {{product.price_unit}}</h5>
 
-        <div class="cart">
-            <form method="POST" class="cart_form">
-                {% csrf_token %}
-                <input type="hidden" name="id_product" value="{{product.id}}">
-                <p>{{ form_cart.quantity }}</p>
-                <button type="submit" class="button">Добавить в корзину</button>
-            </form>
-        </div>
+            <div class="cart">
+                <form method="POST" class="cart_form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id_product" value="{{product.id}}">
+                    <p>{{ form_cart.quantity }}</p>
+                    <button type="submit" class="button">Добавить в корзину</button>
+                </form>
+            </div>
+        {% else %}
+            <p><b>Товар отсутвует на складе.</b></p>
+            <p>Для заказа необходимо связаться с менеджером по номеру телефона: +798173635990</p>
+        {% endif %}
 
     </div>
 

@@ -48,6 +48,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=True, verbose_name='Публикация')
+    in_stock = models.BooleanField(default=True, verbose_name='В наличии')
     views = models.IntegerField(default=0, verbose_name='Кол-во просмотров')
 
     def __str__(self):

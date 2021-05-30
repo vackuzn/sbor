@@ -28,20 +28,26 @@
             </a>
             
             <br>
-            <div class="prices">
-                <div>Цена за штуку: {{ product.price_unit }}</div>
-            </div>
 
-            <br>
-            
-            <div class="cart">
-              <form method="POST" class="cart_form">
-                  {% csrf_token %}
-                  <input type="hidden" name="id_product" value="{{product.id}}">
-                  {{ form_cart.quantity }}
-                  <button type="submit" class="button">Добавить в корзину</button>
-              </form>
-          </div>
+            {% if product.in_stock %}
+              <div class="prices">
+                  <div>Цена за штуку: {{ product.price_unit }}</div>
+              </div>
+
+              <br>
+              
+              <div class="cart">
+                <form method="POST" class="cart_form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id_product" value="{{product.id}}">
+                    {{ form_cart.quantity }}
+                    <button type="submit" class="button">Добавить в корзину</button>
+                </form>
+              </div>
+            {% else %}
+              <p><b>Товар отсутвует на складе.</b></p>
+              <p>Для заказа необходимо связаться с менеджером по номеру телефона: +798173635990</p>
+            {% endif %}
 
         </div>
 
