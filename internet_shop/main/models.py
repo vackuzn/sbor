@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from PIL import Image
+
+_MAX_SIZE = 800
 
 
 class GlobalCategory(models.Model):
@@ -12,6 +15,26 @@ class GlobalCategory(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        """
+        Меняем разрешение картинки на меньшее, если оно больше максимального размера в пикселях.
+        """
+        super(GlobalCategory, self).save(*args, **kwargs)
+        if self.photo:
+            filepath = self.photo.path
+            width = self.photo.width
+            height = self.photo.height
+
+            max_size = max(width, height)
+
+            if max_size > _MAX_SIZE:
+                image = Image.open(filepath)
+                image = image.resize(
+                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
+                     round(height / max_size * _MAX_SIZE)),
+                    Image.ANTIALIAS)
+                image.save(filepath)
 
     class Meta:
         verbose_name = "Глобальная категория"
@@ -30,6 +53,26 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        """
+        Меняем разрешение картинки на меньшее, если оно больше максимального размера в пикселях.
+        """
+        super(Category, self).save(*args, **kwargs)
+        if self.photo:
+            filepath = self.photo.path
+            width = self.photo.width
+            height = self.photo.height
+
+            max_size = max(width, height)
+
+            if max_size > _MAX_SIZE:
+                image = Image.open(filepath)
+                image = image.resize(
+                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
+                     round(height / max_size * _MAX_SIZE)),
+                    Image.ANTIALIAS)
+                image.save(filepath)
 
     class Meta:
         verbose_name = "Категория"
@@ -69,6 +112,26 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_card', kwargs={"pk": self.pk})
 
+    def save(self, *args, **kwargs):
+        """
+        Меняем разрешение картинки на меньшее, если оно больше максимального размера в пикселях.
+        """
+        super(Product, self).save(*args, **kwargs)
+        if self.main_image:
+            filepath = self.main_image.path
+            width = self.main_image.width
+            height = self.main_image.height
+
+            max_size = max(width, height)
+
+            if max_size > _MAX_SIZE:
+                image = Image.open(filepath)
+                image = image.resize(
+                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
+                     round(height / max_size * _MAX_SIZE)),
+                    Image.ANTIALIAS)
+                image.save(filepath)
+
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
@@ -83,6 +146,26 @@ class ImageGallery(models.Model):
 
     def __str__(self):
         return self.product.title
+
+    def save(self, *args, **kwargs):
+        """
+        Меняем разрешение картинки на меньшее, если оно больше максимального размера в пикселях.
+        """
+        super(ImageGallery, self).save(*args, **kwargs)
+        if self.additional_picture:
+            filepath = self.additional_picture.path
+            width = self.additional_picture.width
+            height = self.additional_picture.height
+
+            max_size = max(width, height)
+
+            if max_size > _MAX_SIZE:
+                image = Image.open(filepath)
+                image = image.resize(
+                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
+                     round(height / max_size * _MAX_SIZE)),
+                    Image.ANTIALIAS)
+                image.save(filepath)
 
     class Meta:
         verbose_name = "Дополнительное изображение"
