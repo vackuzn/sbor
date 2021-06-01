@@ -10,7 +10,12 @@
 {% block content %} 
 
 
-<h2> Ваша корзина </h2>
+<h2> Корзина </h2>
+
+{% if cart.get_total_price < 1000 %}
+    <div class="min_order"><b>Общая стоимость заказ должна быть не менее 1000 рублей.</b></div>
+{% endif %}
+
 <br>
 
 {% if cart|length > 0 %}
@@ -29,21 +34,31 @@
             <tr>
                 <td><a href=" {{ item.product.get_absolute_url }}"><img src=" {{ item.product.main_image.url }}" alt=""></a></td>
                 <td>{{ item.product.article }}</td>
-                <td><a href=" {{ item.product.get_absolute_url }}">{{ item.product.title }}</a></td>
+                <td><a href=" {{ item.product.get_absolute_url }}"><b>{{ item.product.title }}</b></a></td>
                 <td>{{ item.product.price_unit }}</td>
                 <td>{{ item.quantity }}</td>
-                <td><a href="/cart/cart_dell_product/{{item.product.id}}">Удалить</a></td> 
-                <td>{{ item.total_price }}</td>   
+                <td><b>{{ item.total_price }}</b></td>   
+                <td>
+                    <a href="/cart/cart_dell_product/{{item.product.id}}" class="link_del">
+                        <img src="{% static 'cart/img/del.png' %}" alt="" class="buttont_del">
+                    </a>
+                </td> 
+                
             </tr>
         {% endfor %}
             <tr>
-                <td colspan="6">Общая стоимость</td>
-                <td>{{cart.get_total_price}}</td>
+                <td colspan="6" class="total_price"><b>Общая стоимость</b></td>
+                <td><b>{{cart.get_total_price}} руб.</b></td>
             </tr>
     </table>
 
     <br>
-    <a href="{% url 'make_order' %}" class="make_order">Оформить заказ</a>
+
+    {% if cart.get_total_price >= 1000 %}
+        <a href="{% url 'make_order' %}" class="make_order"><b>Оформить заказ</b></a>
+    {% elif cart.get_total_price < 1000 %}
+        <div><b>Общая стоимость заказ должна быть не менее 1000 рублей.</b></div>
+    {% endif %}
 
 {% else %}
     <h3>Корзина пуста</h3>
