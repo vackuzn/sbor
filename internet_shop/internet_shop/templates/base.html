@@ -19,12 +19,7 @@
     <title>{% block title %}{% endblock%}</title>
 </head>
 
-
-
 <body>
-
-
-
     <div class="upper_band" id="upper">
         <div class="upper_band_firs_band">
             <div class='logo'>
@@ -103,25 +98,27 @@
 
     <div class="footer">
         <div class="container_footer">
-            <h1 class="footer_logo">Красивый логотип</h1>
-            <img class="rectangle" src="{% static 'img/Rectangle_7.png' %}" alt="">
-            
-            <div class="footer_menu">
-                
-                <div class="left_part_fotter_menu">
-                    
-                    <div class="hashtag">
-                        <img src="{% static 'img/hashtag.svg' %}" alt="">
-                        <h6>Тоже_логотип</h6>
+            <div class="first_column">
+                <div class="logo">
+                    <div class="logo_img">
+                        <img src="{% static 'img/only_logo.png' %}" alt="">
                     </div>
-
-                    <div class="social_network">
-                        <img src="{% static 'img/facebook.svg' %}" alt="">
-                        <img src="{% static 'img/twitter.svg' %}" alt="">
-                        <img src="{% static 'img/instagram.svg' %}" alt="">
+                    <div class="logo_text">
+                        <div><h2>SBOR-MARKET</h2></div>
+                        <div>Товары и продукты с доставкой</div>
                     </div>
                 </div>
-
+                <p>Ежедневно с 9:00 до 21:00</p>
+                <p>+798173635990</p>
+                <p>sbor-market@mail.ru</p>
+            </div>
+            <div class="second_column">
+                <div class="footer_menu">
+                    <h3>Меню</h3>
+                    <a href="{% url 'global_categories' %}">ГЛАВНАЯ</a>
+                    <a href="{% url 'search_order' %}">ПОИСК ЗАКАЗА</a>
+                    <a href="{% url 'my_order' %}">МОИ ЗАКАЗЫ</a> 
+                </div>
             </div>
         </div>
     </div>

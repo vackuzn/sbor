@@ -203,8 +203,10 @@ body {
 
 
 .footer {
+    padding-top: 20px;
     background-color: #262626;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
+    color: white;
 }
 
 .container_footer {
@@ -212,119 +214,63 @@ body {
     margin: auto;
     padding-left: 8px;
     padding-right: 8px;
-}
-
-.footer_logo {
-    display: inline-block;
-    color: #fff;
-    margin-top: 56px;
-    margin-bottom: 40px;
-}
-
-.rectangle {
-    max-width: 100%;
-    margin-left: 0px;
-}
-
-.footer_menu {
-    margin-top: 32px;
     display: flex;
-    justify-content: space-between;
 }
 
-.language {
-    background:grey;
-    width: 227px; height: 40px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-}
-
-.language select {
-    width: 180px;
-    margin-left: 15px;
-    border: none;
-    background-color: rgba(155, 25, 25, 0);
-    color: white;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-
-}
-
-.language option {
-    color:#fff;
-    background: rgba(38, 38, 38, 1);
-}
-
-.hashtag {
-    
-    margin-top: 33px;
-}
-
-.hashtag h6 {
-    display: inline-block;
-    color: #fff;
-}
-
-.social_network {
-    margin-top: 20px;
-
-}
-
-.social_network img {
-    margin-right: 5px;
-}
-
-.center_part_footer_menu, .right_part_footer_menu {
+.footer .first_column{
     display: flex;
     flex-direction: column;
-}
-
-.center_part_footer_menu a, .right_part_footer_menu a {
-    margin-bottom: 23px;
-    color: white;
-    text-decoration: none;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
 
 }
 
-
-.apps {
-    margin-top: 40px;
-    margin-bottom: 40px;
+.footer .first_column .logo{
+    width: 300px;
     display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+}
+
+.footer .logo img{
+    width: 65px;
+}
+
+.footer .logo_text{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+
 }
 
-.apps img {
-    padding-left: 20px;
-    padding-right: 20px;
+.footer h2{
+    margin: 0px;
+    font-size: 29px;
 }
 
-.other {
-    margin-top: 40px;
+.footer .first_column p {
+    margin: 0px;
+    padding-top: 5px;
+}
+
+.footer .second_column{
+    margin-left: 100px;
+
+}
+
+.footer .footer_menu {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-.other a {
+.footer .footer_menu a {
     color: white;
     text-decoration: none;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 11px;
+    padding-bottom: 18px;
 }
 
-.up_button {
-    position: fixed;
-    right: 16px;
-    bottom: 24px;
+.footer .footer_menu a:hover{
+    color: #00C618;
 }
+
+
+
