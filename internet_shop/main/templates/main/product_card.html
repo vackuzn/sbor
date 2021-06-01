@@ -10,62 +10,82 @@
 
 {% block content %} 
 
-<a href="http://127.0.0.1:8000/#nazad">Ссылка</a>
-
 <div class="product_card">
-    <div class="product_title_and_description">
-        <h3>{{product.title}}</h3>
-        <h4>Артикул: {{product.article}}</h4>
-        <br>
-        {% if product.description %}
-        <h4>Описание:</h4>
-        <h5>{{product.description}}</h5> 
-        {% endif %}
-        <br>
-        
-        {% if product.in_stock %}
-            <h4>Цена:</h4>
-            <h5>Цена за {{ product.get_unit_of_measurement_display }}: {{product.price_unit}}</h5>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="product_title_and_description">
+            <div class="title"> <b>{{product.title}}</b></div>
+            <div class="articl">Артикул: {{product.article}}</div>
+            <br>
+            <br>
+            {% if product.description %}
+            <div><b>Описание:</b> {{product.description}}</div>
+            {% endif %}
+            <br>
+            <br>
+            <br>
+            {% if product.in_stock %}
 
-            <div class="cart">
-                <form method="POST" class="cart_form">
-                    {% csrf_token %}
-                    <input type="hidden" name="id_product" value="{{product.id}}">
-                    <p>{{ form_cart.quantity }}</p>
-                    <button type="submit" class="button">Добавить в корзину</button>
-                </form>
-            </div>
-        {% else %}
-            <p><b>Товар отсутвует на складе.</b></p>
-            <p>Для заказа необходимо связаться с менеджером по номеру телефона: +798173635990</p>
-        {% endif %}
+                <div class="cart">
+                    <div class="price"><b>Цена за {{ product.get_unit_of_measurement_display }}: {{product.price_unit}}</b></div>
+                    <div class="batton_and_quantity">
+                      <button id="minus_{{ product.id }}">-</button>
+                      <div id="col_{{ product.id }}"><b>1</b></div>
+                      <button id="plus_{{ product.id }}">+</button>
+                    </div>
+                    
+                    <form method="POST" class="cart_form">
+                      {% csrf_token %}
+                      <input type="hidden" name="id_product" value="{{product.id}}">
+                      <input id="quantity_{{ product.id }}" type="hidden" name="quantity" class="cart_quantity" value="1">
+                      <button type="submit" class="button"> <b>Добавить в корзину</b></button>
+                    </form>
+    
+                    <script type="text/javascript">
+                      $('#plus_{{ product.id }}').on('click', function () {
+                          let num = +$('#quantity_{{ product.id }}').val();
+                          $('#col_{{ product.id }}').text(num + 1);
+                          $('#quantity_{{ product.id }}').val(num + 1);
+                      });
+                      $('#minus_{{ product.id }}').on('click', function () {
+                          let num = +$('#quantity_{{ product.id }}').val();
+                          if (num > 1) $('#col_{{ product.id }}').text(num - 1);
+                          if (num > 1) $('#quantity_{{ product.id }}').val(num - 1);
+                      });
+                    </script>
+                </div>
+            {% else %}
+                <p><b>Товар отсутвует на складе.</b></p>
+                <p>Для заказа необходимо связаться с менеджером по номеру телефона: +798173635990</p>
+            {% endif %}
 
-    </div>
-
-    <div class="pictures">
-        
-        <div class="main_picture">
-            <img src="{{ product.main_image.url }}" alt="">
         </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="pictures">
+            
+            <div class="main_picture">
+                <img src="{{ product.main_image.url }}" alt="">
+            </div>
 
-        <div class="additional_pictures">
-                <a href="{{ product.main_image.url }}"><img src="{{ product.main_image.url }}" alt=""></a>
-            {% for i in additional_pictures %}
-                <a href="{{ i.additional_picture.url }}"><img src="{{ i.additional_picture.url }}" alt=""></a>
-            {% endfor %}
-        </div> 
-        
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $(".additional_pictures a").click(function(){
-                    var largePath = $(this).attr("href");
+            <div class="additional_pictures">
+                    <a href="{{ product.main_image.url }}"><img src="{{ product.main_image.url }}" alt=""></a>
+                {% for i in additional_pictures %}
+                    <a href="{{ i.additional_picture.url }}"><img src="{{ i.additional_picture.url }}" alt=""></a>
+                {% endfor %}
+            </div> 
+            
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $(".additional_pictures a").click(function(){
+                        var largePath = $(this).attr("href");
 
-                    $(".main_picture img").attr({ src: largePath, });
-                    return false;
+                        $(".main_picture img").attr({ src: largePath, });
+                        return false;
+                    });
                 });
-            });
-        </script>
+            </script>
 
+        </div>
     </div>
 </div>
 
