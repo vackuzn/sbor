@@ -134,7 +134,7 @@ body {
 }
 
 .upper_band_second_band .menu a:hover{
-    color: red;
+    color: #00C618;
 }
 
 .upper_band_second_band .basket{
@@ -152,7 +152,7 @@ body {
 }
 
 .basket:hover {
-    color: red;
+    color: #00C618;
 }
 
 .basket .basket_img {
@@ -170,7 +170,7 @@ body {
     width: 20px;
     height: 20px;
     padding: 3px 0px 0 0;
-    background-color: red;
+    background-color: #00C618;
     font-size: 13px;
     color: white;
     text-align: center;

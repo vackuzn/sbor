@@ -1,13 +1,3 @@
-.category_title {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-}
-
-.category_title img {
-    width: 50%;
-}
-
 
 .category_products {
     display: flex;
@@ -16,22 +6,18 @@
 }
 
 .category_product {
-    width: 23.9%;
-    
     margin: 0px 5px;
     margin-bottom: 10px;
     padding: 10px;
+    min-height: 390px;
 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-
-    border: 1px solid black;
-    border-radius: 5px;
-    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    border: 1px solid rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+    border-radius: 10px;
 }
 
 .category_product .articl, .prices {
@@ -41,11 +27,11 @@
 .category_product a {
     text-decoration: none;
     color: black;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .category_product a:hover {
-    color: blue;
+    color: #00C618;
 }
 
 .product_img {
@@ -56,17 +42,83 @@
 .product_img img {
     height: 150px;
     max-width: 100%;
+    
 }
 
-.cart_form {
+.cart .batton_and_quantity{
+    width: 100px;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
+
 }
 
-.cart_quantity {
-    width: 40px;
-    border-radius: 5px;
+.cart .batton_and_quantity button{
+    border: 1px solid #f2f2f2;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: #f2f2f2;
+    box-shadow: 1px 2px 3px rgb(0 0 0 / 40%);
+    font-size: 25px;
+    color: black;
+    text-align: center;
+    cursor: pointer;
 }
+
+form{
+    display: flex;
+    justify-content: center;
+}
+
+form button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 30px;
+    width: 75%;
+    background-color:#00C618;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 2px 3px rgb(0 0 0 / 40%);
+    cursor: pointer;
+    
+}
+
+.paginator {
+    margin-top: 20px;
+    display: flex;
+}
+
+.paginator a {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding-top: 3px;
+    color: white;
+    text-decoration: none;
+    background-color:#00C618;
+    border-radius: 50px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.paginator .paginator_back {
+    padding-right: 10px;
+}
+
+.paginator .paginator_next {
+    padding-left: 10px;
+}
+
+.paginator .paginator_number .page_active {
+    background-color: green;
+}
+
+
 
 

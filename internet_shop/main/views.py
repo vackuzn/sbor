@@ -39,7 +39,7 @@ def category(request, slug):
     category.save()
 
     # пагинация
-    paginator = Paginator(all_products, 40)
+    paginator = Paginator(all_products, 20)
     page_num = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_num)
 
