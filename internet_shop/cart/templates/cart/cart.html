@@ -13,7 +13,7 @@
 <h2> Корзина </h2>
 
 {% if cart.get_total_price < 1000 %}
-    <div class="min_order"><b>Общая стоимость заказ должна быть не менее 1000 рублей.</b></div>
+    <div class="min_order"><b>Общая стоимость заказа должна быть не менее 1000 рублей.</b></div>
 {% endif %}
 
 <br>
@@ -57,7 +57,7 @@
     {% if cart.get_total_price >= 1000 %}
         <a href="{% url 'make_order' %}" class="make_order"><b>Оформить заказ</b></a>
     {% elif cart.get_total_price < 1000 %}
-        <div><b>Общая стоимость заказ должна быть не менее 1000 рублей.</b></div>
+        <div><b>Общая стоимость заказа должна быть не менее 1000 рублей.</b></div>
     {% endif %}
 
 {% else %}

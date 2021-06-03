@@ -62,7 +62,8 @@ def make_order(request):
             # очистить корзину
             cart.clear()
 
-            return HttpResponseRedirect(reverse('pay_order', args=[new_order.order_number]))
+            #return HttpResponseRedirect(reverse('pay_order', args=[new_order.order_number]))
+            return HttpResponseRedirect(reverse('view_order', args=[new_order.order_number]))
 
     else:
         form = OrderForm()

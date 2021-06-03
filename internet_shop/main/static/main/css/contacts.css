@@ -1,0 +1,29 @@
+
+.contacts2 {
+    display: flex;
+
+}
+
+
+.contacts2 .contacts_raw {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.contacts2 .contacts_raw img {
+    height: 20px;
+}
+
+.contacts2 .contacts_raw p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 6px;
+}
+
+.contacts2 .map {
+    display: flex;
+    justify-content: flex-end;
+
+}

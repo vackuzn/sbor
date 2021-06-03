@@ -265,6 +265,7 @@ body {
 
 .footer .footer_menu a {
     color: white;
+    font-size: 14px;
     text-decoration: none;
     padding-bottom: 18px;
 }

@@ -71,6 +71,9 @@ def product_card(request, pk):
 
     return render(request, 'main/product_card.html', context)
 
+def contacts(request):
+    return render(request, 'main/contacts.html')
+
 
 
 

@@ -69,6 +69,7 @@
                 <div class="menu_links"><a href="{% url 'global_categories' %}">ГЛАВНАЯ</a></div>
                 <div class="menu_links"><a href="{% url 'search_order' %}">ПОИСК ЗАКАЗА</a></div>
                 <div class="menu_links"><a href="{% url 'my_order' %}">МОИ ЗАКАЗЫ</a></div> 
+                <div class="menu_links"><a href="{% url 'contacts' %}">КОНТАКТЫ</a></div> 
                 {% if request.user.is_superuser %}
                 <div class="menu_links"><a href="/admin">АДМИН ПАНЕЛЬ</a></div>
                 {% endif %}
@@ -118,6 +119,7 @@
                     <a href="{% url 'global_categories' %}">ГЛАВНАЯ</a>
                     <a href="{% url 'search_order' %}">ПОИСК ЗАКАЗА</a>
                     <a href="{% url 'my_order' %}">МОИ ЗАКАЗЫ</a> 
+                    <a href="{% url 'contacts' %}">КОНТАКТЫ</a>
                 </div>
             </div>
         </div>

@@ -10,6 +10,12 @@
 
 }
 
+.min_order{
+    font-size: 20px;
+    color: red;
+    text-align: right;
+}
+
 .cart_table {
     width: 100%;
 }
@@ -18,22 +24,72 @@
     width: 100px;
 }
 
-table, td, th {
-    border: 1px solid grey;
+table {
+    border: 1px solid black;
+    border-color: #e5e5e5;
+    border-radius: 5px;
     text-align: center;
+    border-spacing: 0px;
 }
 
-.order{
-    width: 600px;
-    margin: auto;
+
+table tr th{
+    background-color: #e5e5e5;
+    height: 40px;
+}
+
+table tr td{
+    border-bottom: 1px solid  #e5e5e5;
+}
+
+table a{
+    text-decoration: none;
+    color: black;
+}
+
+table .link_del{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #e5e5e5;
+    box-shadow: 1px 2px 3px rgb(0 0 0 / 40%);
+    border-radius: 10px;
+}
+
+table .buttont_del{
+    padding-top: 7px;
+    width: 13px;
+
+}
+
+table .total_price {
+    text-align: right;
+}
+
+.order form{
+    padding: 10px;
+    border: 2px solid #00C618;
+    border-radius: 10px;
+}
+
+.order form input{
+    width: 95%;
+
+}
+
+.order .order_form_field{
+    margin-bottom: 10px;
+}
+
+.button_make_order {
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    border: 1px solid #00C618;
+    background-color: #00C618;
+    font-size: 15px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
     
-}
-
-.order div {
-    width: 100%;
-    
-}
-
-.order .form_field {
-    width: 100%;
 }

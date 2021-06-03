@@ -12,7 +12,6 @@
 
 {% block content %} 
 <h2>Страница заказа</h2>
-<br>
 <h3>Номер заказа: {{order.order_number}}</h3>
 <h3>Статус заказа: 
     {% if order.status == 'order_is_paid' %} Заказ оплачен
@@ -21,11 +20,11 @@
     {% endif %}
 </h3>
 <h3>Цена заказа: {{order.total_price}} руб.</h3>
-<br>
 {% if order.status == 'order_is_made' %}
-    <div class='message_order_not_paid'>Заказ не оплачен. <a href="{% url 'pay_order' order_number=order.order_number %}">Оплатить</a></div>
+    <div class='message_order_not_paid'>Заказ не оплачен.
+        <!-- <a href="{% url 'pay_order' order_number=order.order_number %}">Оплатить</a> -->
+    </div>
 {% endif %}
-<br>
 <h3>Элементы заказа:</h3>
 <table class="view_order_table">
     <tr>

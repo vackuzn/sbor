@@ -59,7 +59,8 @@ class OrderProduct(models.Model):
     quantity = models.PositiveIntegerField(default=1, verbose_name='Количество')
 
     def get_cost(self):
-        return int(self.quantity) * float(self.price)
+        res = int(self.quantity) * float(self.price)
+        return res
 
     def __str__(self):
         return str(self.order.order_number) + '_' + str(self.product.title)
