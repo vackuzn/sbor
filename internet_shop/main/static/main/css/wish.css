@@ -1,0 +1,32 @@
+.wish h2{
+   color: #00C618;
+}
+
+.wish form{
+    padding: 10px;
+    border: 2px solid #00C618;
+    border-radius: 10px;
+}
+
+.wish form input, textarea{
+    width: 95%;
+
+}
+
+
+.wish .wish_form_field{
+    margin-bottom: 10px;
+}
+
+.button_make_wish {
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    border: 1px solid #00C618;
+    background-color: #00C618;
+    font-size: 15px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    
+}

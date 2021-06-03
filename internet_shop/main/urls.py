@@ -7,5 +7,6 @@ urlpatterns = [
     path('global_category/<slug>', global_category, name='global_category'),
     path('category/<slug>', category, name='category'),
     path('product/<int:pk>', product_card, name='product_card'),
-    path('contacts/', contacts, name='contacts')
+    path('contacts/', contacts, name='contacts'),
+    path('wish/', wish, name='wish'),
 ]

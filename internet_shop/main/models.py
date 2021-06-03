@@ -172,3 +172,22 @@ class ImageGallery(models.Model):
         verbose_name_plural = "Дополнительные изображения"
         ordering = ['-created_at']
 
+
+class Wish(models.Model):
+    CHOICES_STATUS = [
+        ('wish_is_made', 'Создано'),
+        ('wish_is_done', 'Выполнено'),
+        ('wish_is_fulfilled', 'Отклонено'),
+    ]
+
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=150, verbose_name='Краткое описание')
+    name = models.CharField(max_length=150, verbose_name='Имя')
+    description = models.TextField(verbose_name='Подробное описание', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    status = models.CharField(max_length=200, choices=CHOICES_STATUS, default='wish_is_made', verbose_name='Статус')
+
+    class Meta:
+        verbose_name = "Пожелание"
+        verbose_name_plural = "Пожелания"
+        ordering = ['-created_at']

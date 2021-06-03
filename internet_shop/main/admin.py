@@ -77,9 +77,18 @@ class ProductAdmin(admin.ModelAdmin):
     get_photo.short_description = 'Фото'
 
 
+class WishAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'created_at', 'status')
+    list_display_links = ('title',)
+    list_editable = ('status',)
+    fields = ('title', 'name', 'description', 'created_at', 'status')
+    readonly_fields = ('created_at',)
+
+
 admin.site.register(GlobalCategory, GlobalCategoryAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Wish, WishAdmin)
 
 admin.site.site_title = "Админ панель"
 admin.site.site_header = "Админ панель"

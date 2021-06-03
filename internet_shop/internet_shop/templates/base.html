@@ -70,6 +70,7 @@
                 <div class="menu_links"><a href="{% url 'search_order' %}">ПОИСК ЗАКАЗА</a></div>
                 <div class="menu_links"><a href="{% url 'my_order' %}">МОИ ЗАКАЗЫ</a></div> 
                 <div class="menu_links"><a href="{% url 'contacts' %}">КОНТАКТЫ</a></div> 
+                <div class="menu_links"><a href="{% url 'wish' %}">ПОЖЕЛАНИЯ</a></div> 
                 {% if request.user.is_superuser %}
                 <div class="menu_links"><a href="/admin">АДМИН ПАНЕЛЬ</a></div>
                 {% endif %}

@@ -5,6 +5,7 @@ from django.db.models import Count, F
 from django.core.paginator import Paginator
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
+from main.forms import WishForm
 from django.urls import reverse_lazy
 
 
@@ -71,8 +72,24 @@ def product_card(request, pk):
 
     return render(request, 'main/product_card.html', context)
 
+
 def contacts(request):
     return render(request, 'main/contacts.html')
+
+
+def wish(request):
+    if request.method == "POST":
+        form = WishForm(request.POST)
+        if form.is_valid():
+            form.save()
+        header = 'Благодарим за пожелания'
+        context = {'header': header}
+    else:
+        header = 'Ваши пожелания'
+        form = WishForm()
+        context = {'form': form, 'header': header}
+
+    return render(request, 'main/wish.html', context)
 
 
 
