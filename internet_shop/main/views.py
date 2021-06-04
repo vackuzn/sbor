@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import GlobalCategory, Category, Product
+from main.models import GlobalCategory, Category, Product, SiteSettings
 from django.db.models import Count, F
 from django.core.paginator import Paginator
 from cart.cart import Cart
@@ -91,6 +91,12 @@ def wish(request):
 
     return render(request, 'main/wish.html', context)
 
+
+def delivery_terms(request):
+    settings_delivery_terms = SiteSettings.objects.get(id=2)  # забираем текст из модели настроек
+    text = settings_delivery_terms.value
+    context = {'text': text}
+    return render(request, 'main/delivery_terms.html', context)
 
 
 

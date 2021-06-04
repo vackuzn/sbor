@@ -39,21 +39,6 @@ class Cart(object):
             del self.cart[product_id]
             self.save()
 
-    def __iter__(self):
-        product_ids = self.cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
-
-        for product in products:
-            self.cart[str(product.id)]['product'] = product
-
-        for item in self.cart.values():
-            item['price'] = item['price']
-            item['total_price'] = float(item['price']) * float(item['quantity'])
-            yield item
-
-    def __len__(self):
-        return sum(item['quantity'] for item in self.cart.values())
-
     def get_total_price(self):
         """
         Подсчет стоимости товаров в корзине.
@@ -64,3 +49,18 @@ class Cart(object):
         # удаление корзины из сессии
         del self.session[settings.CART_SESSION_ID]
         self.session.modified = True
+
+    def __iter__(self):
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+
+        for product in products:
+            self.cart[str(product.id)]['product'] = product
+
+        for item in self.cart.values():
+            item['price'] = item['price']
+            item['total_price'] = format(float(item['price']) * int(item['quantity']), '.2f')
+            yield item
+
+    def __len__(self):
+        return sum(item['quantity'] for item in self.cart.values())

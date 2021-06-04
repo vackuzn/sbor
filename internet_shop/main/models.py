@@ -191,3 +191,13 @@ class Wish(models.Model):
         verbose_name = "Пожелание"
         verbose_name_plural = "Пожелания"
         ordering = ['-created_at']
+
+
+class SiteSettings(models.Model):
+    key_title = models.CharField(max_length=150, verbose_name='Ключ')
+    description = models.CharField(max_length=150, verbose_name='Описание')
+    value = models.TextField(verbose_name='Значение')
+
+    class Meta:
+        verbose_name = "Настройка сайта"
+        verbose_name_plural = "Настройки сайта"

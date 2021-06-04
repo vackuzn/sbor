@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Условия доставки {% endblock %}
+
+{% load static %}
+
+{% block for_connect_another %}
+    <link rel="stylesheet" href="{% static 'order_and_pay/css/delivery_terms.css' %}">
+        
+{% endblock%}
+
+{% block content %} 
+
+<h2>Условия доставки</h2>
+
+
+{% autoescape off %}
+    {{ text }}
+{% endautoescape %}
+
+{% endblock%}

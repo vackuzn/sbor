@@ -1,6 +1,7 @@
 from django.contrib import admin
 from main.models import *
 from django.utils.safestring import mark_safe
+from django.forms import TextInput, Textarea
 
 
 class GlobalCategoryAdmin(admin.ModelAdmin):
@@ -85,10 +86,22 @@ class WishAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at',)
 
 
+class SiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'description',)
+    list_display_links = ('description',)
+    fields = ('key_title', 'description', 'value')
+    #readonly_fields = ('title', )
+
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'rows': 10, 'cols': 70})},
+    }
+
+
 admin.site.register(GlobalCategory, GlobalCategoryAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Wish, WishAdmin)
+admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 admin.site.site_title = "Админ панель"
 admin.site.site_header = "Админ панель"
