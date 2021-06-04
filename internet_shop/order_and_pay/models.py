@@ -8,7 +8,6 @@ from django.urls import reverse
 class Order(models.Model):
     CHOICES_CITY = [
         ('sb', 'Сосновый бор'),
-
     ]
 
     CHOICES_STATUS = [
