@@ -82,7 +82,7 @@ class WishAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'created_at', 'status')
     list_display_links = ('title',)
     list_editable = ('status',)
-    fields = ('title', 'name', 'description', 'created_at', 'status')
+    fields = ('title', 'name', 'contacts', 'description', 'created_at', 'status')
     readonly_fields = ('created_at',)
 
 

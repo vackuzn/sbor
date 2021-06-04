@@ -183,6 +183,7 @@ class Wish(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=150, verbose_name='Краткое описание')
     name = models.CharField(max_length=150, verbose_name='Имя')
+    contacts = models.CharField(max_length=150, verbose_name='Адрес электронной почты либо телефон', blank=True)
     description = models.TextField(verbose_name='Подробное описание', blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     status = models.CharField(max_length=200, choices=CHOICES_STATUS, default='wish_is_made', verbose_name='Статус')
