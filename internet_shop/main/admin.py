@@ -87,10 +87,10 @@ class WishAdmin(admin.ModelAdmin):
 
 
 class SiteSettingsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'description',)
+    list_display = ('description',)
     list_display_links = ('description',)
-    fields = ('key_title', 'description', 'value')
-    #readonly_fields = ('title', )
+    fields = ('description', 'value')
+    readonly_fields = ('description', )
 
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 10, 'cols': 70})},

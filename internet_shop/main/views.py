@@ -98,5 +98,3 @@ def delivery_terms(request):
     context = {'text': text}
     return render(request, 'main/delivery_terms.html', context)
 
-
-
