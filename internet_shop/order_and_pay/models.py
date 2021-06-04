@@ -7,10 +7,8 @@ from django.urls import reverse
 
 class Order(models.Model):
     CHOICES_CITY = [
-        ('spb', 'Санкт-Петербург'),
-        ('psh', 'Пушкин'),
-        ('gatchina', 'Гатчина'),
-        ('vsecologsk', 'Всеволожск'),
+        ('sb', 'Сосновый бор'),
+
     ]
 
     CHOICES_STATUS = [
