@@ -32,15 +32,15 @@
             <div class='contacts'>
                 <div class="contacts_raw">
                     <img src="{% static 'img/clock.png' %}" alt="">
-                    <p><b>Ежедневно с 9:00 до 21:00</b></p>
+                    <p><b>{{ contacts_time }}</b></p>
                 </div>
                 <div class="contacts_raw">
                     <img src="{% static 'img/phone.png' %}" alt="">
-                    <p><b>+798173635990</b></p>
+                    <p><b>{{ contacts_telephone }}</b></p>
                 </div>
                 <div class="contacts_raw">
                     <img src="{% static 'img/mail.png' %}" alt="">
-                    <p><b>sbor-market@mail.ru</b></p>
+                    <p><b>{{ contacts_email }}</b></p>
                 </div>
             </div>
 
@@ -113,9 +113,9 @@
                         <div>Товары и продукты с доставкой</div>
                     </div>
                 </div>
-                <p>Ежедневно с 9:00 до 21:00</p>
-                <p>+798173635990</p>
-                <p>sbor-market@mail.ru</p>
+                <p>{{ contacts_time }}</p>
+                <p>{{ contacts_telephone }}</p>
+                <p>{{ contacts_email }}</p>
             </div>
             <div class="second_column">
                 <div class="footer_menu">
