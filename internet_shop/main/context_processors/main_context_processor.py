@@ -7,5 +7,6 @@ def main(request):
         'contacts_telephone': SiteSettings.objects.get(key_title='contacts_telephone').value,
         'contacts_time': SiteSettings.objects.get(key_title='contacts_time').value,
         'contacts_email': SiteSettings.objects.get(key_title='contacts_email').value,
+        'contacts_for_order': SiteSettings.objects.get(key_title='contacts_for_order').value,
     }
     return context
