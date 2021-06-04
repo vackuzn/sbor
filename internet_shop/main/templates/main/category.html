@@ -7,6 +7,13 @@
 
 {% block content %} 
 
+<br>
+<div class="navigation">
+  <a href="{% url 'global_categories' %}">Главная</a> >
+  <a href="/global_category/{{ category.global_category.slug }}">{{ category.global_category }}</a> >
+</div>
+
+
 <div class="category_title">
     <h2 class="title">{{category.title}}</h2>
 </div>

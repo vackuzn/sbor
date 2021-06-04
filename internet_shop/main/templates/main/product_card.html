@@ -10,6 +10,14 @@
 
 {% block content %} 
 
+<br>
+<div class="navigation">
+  <a href="{% url 'global_categories' %}">Главная</a> >
+  <a href="/global_category/{{ product.category.global_category.slug }}">{{ product.category.global_category }}</a> >
+  <a href="/category/{{ product.category.slug }}">{{ product.category }}</a>
+</div>
+
+
 <div class="product_card">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <div class="product_title_and_description">
