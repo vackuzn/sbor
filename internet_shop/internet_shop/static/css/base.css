@@ -1,10 +1,12 @@
 {% load static %}
 
+html {
+    height: 100%;
+}
+
 body {
     margin: 0px;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    height: 100%;
 }
 
 .title {
@@ -199,9 +201,14 @@ body {
 
 .container_content {
     width: 961px;
+    box-sizing: border-box;
+    min-height: 70%;
+    
     margin: auto;
     padding-left: 8px;
     padding-right: 8px;
+    padding-bottom: 90px;
+
 }
 
 
@@ -209,13 +216,11 @@ body {
 
 
 .footer {
-    padding-top: 20px;
+    margin-top: -80px;
+
     background-color: #262626;
     padding-bottom: 20px;
     color: white;
-
-
-
 
 }
 
