@@ -22,7 +22,7 @@ source $VENV_FOLDER/bin/activate
 
 print "Cloning repo, branch $BRANCH_NAME"
 rm -rf $TEMP_REPO_FOLDER
-git clone -b $BRANCH_NAME https://github.com/o-seer/sbormarket.git $TEMP_REPO_FOLDER
+git clone -b $BRANCH_NAME git@github.com:o-seer/sbormarket.git $TEMP_REPO_FOLDER
 
 print "Installing dependencies"
 pip install -r $TEMP_REPO_FOLDER/requirements.txt
