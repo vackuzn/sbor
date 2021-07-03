@@ -1,0 +1,20 @@
+{
+  "DEBUG": false,
+  "SECRET_KEY": "-",
+  "ALLOWED_HOSTS": [
+    "sbor-market.ru",
+    "sbx.cb06943.tmweb.ru",
+    "cb06943.tmweb.ru",
+    "127.0.0.1"
+    ],
+  "SECURE_SSL_REDIRECT": true,
+  "EMAIL_CONF": {
+  "EMAIL_HOST": "smtp.timeweb.ru",
+  "EMAIL_HOST_USER": "info@sbor-market.ru",
+  "EMAIL_HOST_PASSWORD": "-",
+  "EMAIL_PORT": 465,
+  "EMAIL_USE_SSL": true,
+  "SEND_EMAIL_TO": "sbor-market@mail.ru"
+  }
+}
+
