@@ -195,6 +195,7 @@ class Wish(models.Model):
 
 
 class SiteSettings(models.Model):
+    id = models.AutoField(primary_key=True)
     key_title = models.CharField(max_length=150, verbose_name='Ключ')
     description = models.CharField(max_length=150, verbose_name='Описание')
     value = models.TextField(verbose_name='Значение')
