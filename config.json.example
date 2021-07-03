@@ -1,13 +1,13 @@
 {
-  "DEBUG": false,
-  "SECRET_KEY": "-",
+  "DEBUG": true,
+  "SECRET_KEY": "+1roqbu7@)*_z$^w(cs*=e-nkz48y$mh@#h+$*5@056j$1d5vg",
   "ALLOWED_HOSTS": [
     "sbor-market.ru",
     "sbx.cb06943.tmweb.ru",
     "cb06943.tmweb.ru",
     "127.0.0.1"
     ],
-  "SECURE_SSL_REDIRECT": true,
+  "SECURE_SSL_REDIRECT": false,
   "EMAIL_CONF": {
   "EMAIL_HOST": "smtp.timeweb.ru",
   "EMAIL_HOST_USER": "info@sbor-market.ru",
