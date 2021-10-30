@@ -1,57 +1,23 @@
 from django.db import models
 from django.urls import reverse
-from PIL import Image
+from utils.utils import resize_photo
 
-_MAX_SIZE = 800
-
-
-class GlobalCategory(models.Model):
-    id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=150, verbose_name='Название категории')
-    slug = models.SlugField(max_length=150, unique=True, verbose_name='Слаг')
-    photo = models.ImageField(upload_to='category_photos/', verbose_name='Фото')
-    is_published = models.BooleanField(default=True, verbose_name='Публикация')
-    views = models.IntegerField(default=0, verbose_name='Просмотры')
-
-    def __str__(self):
-        return self.title
-
-    def save(self, *args, **kwargs):
-        """
-        Меняем разрешение картинки на меньшее, если оно больше максимального размера в пикселях.
-        """
-        super(GlobalCategory, self).save(*args, **kwargs)
-        if self.photo:
-            filepath = self.photo.path
-            width = self.photo.width
-            height = self.photo.height
-
-            max_size = max(width, height)
-
-            if max_size > _MAX_SIZE:
-                image = Image.open(filepath)
-                image = image.resize(
-                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
-                     round(height / max_size * _MAX_SIZE)),
-                    Image.ANTIALIAS)
-                image.save(filepath)
-
-    class Meta:
-        verbose_name = "Глобальная категория"
-        verbose_name_plural = "Глобальные категории"
-        ordering = ['title']
+_MAX_PHOTO_SIZE = 800
 
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=150, verbose_name='Название категории')
     slug = models.SlugField(max_length=150, unique=True, verbose_name='Слаг')
-    global_category = models.ForeignKey(GlobalCategory, on_delete=models.CASCADE, verbose_name='Глобальная категория')
-    photo = models.ImageField(upload_to='category_photos/', verbose_name='Фото')
+    parent_category = models.ForeignKey('self', on_delete=models.CASCADE, verbose_name='Родительская категория', blank=True, null=True)
+    photo = models.ImageField(upload_to='category_photos/', verbose_name='Фото', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Публикация')
     views = models.IntegerField(default=0, verbose_name='Просмотры')
 
     def __str__(self):
+        if self.parent_category:
+            return self.parent_category.__str__() + " --> " + self.title
+
         return self.title
 
     def save(self, *args, **kwargs):
@@ -59,20 +25,10 @@ class Category(models.Model):
         Меняем разрешение картинки на меньшее, если оно больше максимального размера в пикселях.
         """
         super(Category, self).save(*args, **kwargs)
-        if self.photo:
-            filepath = self.photo.path
-            width = self.photo.width
-            height = self.photo.height
+        if self.photo is None:
+            self.photo = "no_photo.png"
 
-            max_size = max(width, height)
-
-            if max_size > _MAX_SIZE:
-                image = Image.open(filepath)
-                image = image.resize(
-                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
-                     round(height / max_size * _MAX_SIZE)),
-                    Image.ANTIALIAS)
-                image.save(filepath)
+        resize_photo(self.photo, _MAX_PHOTO_SIZE)
 
     class Meta:
         verbose_name = "Категория"
@@ -117,20 +73,7 @@ class Product(models.Model):
         Меняем разрешение картинки на меньшее, если оно больше максимального размера в пикселях.
         """
         super(Product, self).save(*args, **kwargs)
-        if self.main_image:
-            filepath = self.main_image.path
-            width = self.main_image.width
-            height = self.main_image.height
-
-            max_size = max(width, height)
-
-            if max_size > _MAX_SIZE:
-                image = Image.open(filepath)
-                image = image.resize(
-                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
-                     round(height / max_size * _MAX_SIZE)),
-                    Image.ANTIALIAS)
-                image.save(filepath)
+        resize_photo(self.main_image, _MAX_PHOTO_SIZE)
 
     class Meta:
         verbose_name = "Товар"
@@ -152,20 +95,7 @@ class ImageGallery(models.Model):
         Меняем разрешение картинки на меньшее, если оно больше максимального размера в пикселях.
         """
         super(ImageGallery, self).save(*args, **kwargs)
-        if self.additional_picture:
-            filepath = self.additional_picture.path
-            width = self.additional_picture.width
-            height = self.additional_picture.height
-
-            max_size = max(width, height)
-
-            if max_size > _MAX_SIZE:
-                image = Image.open(filepath)
-                image = image.resize(
-                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
-                     round(height / max_size * _MAX_SIZE)),
-                    Image.ANTIALIAS)
-                image.save(filepath)
+        resize_photo(self.additional_picture, _MAX_PHOTO_SIZE)
 
     class Meta:
         verbose_name = "Дополнительное изображение"

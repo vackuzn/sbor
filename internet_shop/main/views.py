@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import GlobalCategory, Category, Product, SiteSettings
+from main.models import Category, Product, SiteSettings
 from django.db.models import Count, F
 from django.core.paginator import Paginator
 from cart.cart import Cart
@@ -16,14 +16,14 @@ def main_page(request):
 
 
 def global_categories(request):
-    all_global_categories = GlobalCategory.objects.filter(is_published=True)
+    all_global_categories = Category.objects.filter(parent_category=None)
     print(all_global_categories)
     context = {'all_categories': all_global_categories}
     return render(request, 'main/global_categories.html', context)
 
 
 def global_category(request, slug):
-    global_category = GlobalCategory.objects.get(slug=slug)
+    global_category = Category.objects.filter(parent_category=None).get(slug=slug)
     all_categories = Category.objects.filter(global_category=global_category, is_published=True)
     context = {'all_categories': all_categories, 'global_category': global_category}
     return render(request, 'main/categories.html', context)
@@ -32,10 +32,12 @@ def global_category(request, slug):
 def category(request, slug):
     category = Category.objects.get(slug=slug)
     all_products = Product.objects.filter(category=category, is_published=True)
+    child_categories = Category.objects.filter(parent_category=category)
+
     form_cart = CartAddProductForm()
 
     # счетчик посещений этой категории
-    if request.GET.get('page') == None:
+    if request.GET.get('page') is None:
         category.views = F('views') + 1
     category.save()
 
@@ -52,8 +54,25 @@ def category(request, slug):
             product = Product.objects.get(id=form.cleaned_data['id_product'])
             cart.add(product=product, quantity=form.cleaned_data['quantity'])
 
-    context = {'category': category, 'page_obj': page_obj, 'form_cart': form_cart}
+    context = {
+        'category': category,
+        'page_obj': page_obj,
+        'form_cart': form_cart,
+        'child_categories': child_categories,
+        'breadcrumbs': _get_breadcrumbs(category)
+    }
+
     return render(request, 'main/category.html', context)
+
+
+def _get_breadcrumbs(cat):
+    breadcrumbs = []
+    while cat.parent_category is not None:
+        breadcrumbs.insert(0, cat.parent_category)
+        cat = cat.parent_category
+
+    return breadcrumbs
+
 
 
 def product_card(request, pk):
@@ -97,4 +116,3 @@ def delivery_terms(request):
     text = settings_delivery_terms.value
     context = {'text': text}
     return render(request, 'main/delivery_terms.html', context)
-

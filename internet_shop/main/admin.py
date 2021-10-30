@@ -1,35 +1,16 @@
 from django.contrib import admin
-from main.models import *
+from django.forms import Textarea
 from django.utils.safestring import mark_safe
-from django.forms import TextInput, Textarea
-
-
-class GlobalCategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'is_published', 'views', 'photo', 'get_photo')
-    list_display_links = ('id', 'title')
-    search_fields = ('id', 'title')
-    list_editable = ('is_published',)
-
-    fields = ('title', 'is_published', 'views', 'slug', 'photo', 'get_photo')
-    readonly_fields = ('views', 'get_photo')
-
-    def get_photo(self, obj):
-        if obj.photo:
-            res = mark_safe(f'<img src="{obj.photo.url}" width="75">')
-        else:
-            res = "нет картинки"
-        return res
-
-    get_photo.short_description = 'Миниатюра'
+from main.models import *
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'global_category', 'is_published', 'views', 'photo', 'get_photo')
+    list_display = ('id', 'title', 'parent_category', 'is_published', 'views', 'photo', 'get_photo')
     list_display_links = ('id', 'title')
     search_fields = ('id', 'title')
-    list_editable = ('is_published', 'global_category')
+    list_editable = ('is_published', 'parent_category')
 
-    fields = ('title', 'is_published', 'global_category', 'views', 'slug', 'photo', 'get_photo')
+    fields = ('title', 'is_published', 'parent_category', 'views', 'slug', 'photo', 'get_photo')
     readonly_fields = ('views', 'get_photo')
 
     def get_photo(self, obj):
@@ -96,7 +77,6 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     }
 
 
-admin.site.register(GlobalCategory, GlobalCategoryAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Wish, WishAdmin)

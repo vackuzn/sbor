@@ -10,7 +10,9 @@
 <br>
 <div class="navigation">
   <a href="{% url 'global_categories' %}">Главная</a> >
-  <a href="/global_category/{{ category.global_category.slug }}">{{ category.global_category }}</a> >
+    {% for parent_category in breadcrumbs %}
+        <a href="/category/{{ parent_category.slug }}">{{ parent_category.title }}</a> >
+    {% endfor %}
   <p>{{category.title}}</p>
 </div>
 
@@ -18,6 +20,24 @@
 <div class="category_title">
     <h2 class="title">{{category.title}}</h2>
 </div>
+
+<h3 class="title">Подкатегории</h3>
+<div class="child_categories">
+    {% for child_category in child_categories %}
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+            <div class="child_category">
+                <a href="/category/{{ child_category.slug }}">
+                    <div>
+                        <img class="aaaaaaaa" src="{{ child_category.photo.url }}" alt="">
+                    </div>
+                    <div class="categories_title">{{child_category.title}}</div>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<h3 class="title">Товары</h3>
 
 <div class="category_products">
     {% for product in page_obj %}

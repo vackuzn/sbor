@@ -9,6 +9,23 @@
     color: grey;
 }
 
+.child_categories {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.child_category {
+    position: relative;
+    padding: 10px;
+}
+
+.child_categories .child_category img {
+    width: 100%;
+    border-radius: 10%;
+}
+
 .category_products {
     display: flex;
     flex-direction: row;
