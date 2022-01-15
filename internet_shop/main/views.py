@@ -17,7 +17,6 @@ def main_page(request):
 
 def global_categories(request):
     all_global_categories = Category.objects.filter(parent_category=None)
-    print(all_global_categories)
     context = {'all_categories': all_global_categories}
     return render(request, 'main/global_categories.html', context)
 
