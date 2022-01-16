@@ -56,11 +56,8 @@
 
 
 .product_card .cart {
-    padding: 10px;
-    width: 250px;
-
+    width: 100%;
     text-align: center;
-
     border: 1px solid rgba(0,0,0,0.2);
     box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
     border-radius: 10px;

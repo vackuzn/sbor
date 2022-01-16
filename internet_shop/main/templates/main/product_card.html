@@ -63,38 +63,37 @@
             {% endif %}
             <br>
             {% if product.in_stock %}
-
-                <div class="cart">
-                    <div class="price"><b>Цена за {{ product.get_unit_of_measurement_display }}: {{product.price_unit}}</b></div>
-                    <div class="batton_and_quantity">
-                      <button id="minus_{{ product.id }}">-</button>
-                      <div id="col_{{ product.id }}"><b>1</b></div>
-                      <button id="plus_{{ product.id }}">+</button>
-                    </div>
-                    
-                    <form method="POST" class="cart_form">
-                      {% csrf_token %}
-                      <input type="hidden" name="id_product" value="{{product.id}}">
-                      <input id="quantity_{{ product.id }}" type="hidden" name="quantity" class="cart_quantity" value="1">
-                      <button type="submit" class="button"> <b>Добавить в корзину</b></button>
-                    </form>
-    
-                    <script type="text/javascript">
-                      $('#plus_{{ product.id }}').on('click', function () {
-                          let num = +$('#quantity_{{ product.id }}').val();
-                          $('#col_{{ product.id }}').text(num + 1);
-                          $('#quantity_{{ product.id }}').val(num + 1);
-                      });
-                      $('#minus_{{ product.id }}').on('click', function () {
-                          let num = +$('#quantity_{{ product.id }}').val();
-                          if (num > 1) $('#col_{{ product.id }}').text(num - 1);
-                          if (num > 1) $('#quantity_{{ product.id }}').val(num - 1);
-                      });
-                    </script>
+            <div class="cart">
+                <div class="price"><b>Цена за {{ product.get_unit_of_measurement_display }}: {{product.price_unit}}</b></div>
+                <div class="batton_and_quantity">
+                    <button id="minus_{{ product.id }}">-</button>
+                    <div id="col_{{ product.id }}"><b>1</b></div>
+                    <button id="plus_{{ product.id }}">+</button>
                 </div>
+                
+                <form method="POST" class="cart_form">
+                    {% csrf_token %}
+                    <input type="hidden" name="id_product" value="{{product.id}}">
+                    <input id="quantity_{{ product.id }}" type="hidden" name="quantity" class="cart_quantity" value="1">
+                    <button type="submit" class="button"> <b>Добавить в корзину</b></button>
+                </form>
+
+                <script type="text/javascript">
+                    $('#plus_{{ product.id }}').on('click', function () {
+                        let num = +$('#quantity_{{ product.id }}').val();
+                        $('#col_{{ product.id }}').text(num + 1);
+                        $('#quantity_{{ product.id }}').val(num + 1);
+                    });
+                    $('#minus_{{ product.id }}').on('click', function () {
+                        let num = +$('#quantity_{{ product.id }}').val();
+                        if (num > 1) $('#col_{{ product.id }}').text(num - 1);
+                        if (num > 1) $('#quantity_{{ product.id }}').val(num - 1);
+                    });
+                </script>
+            </div>
             {% else %}
-                <p><b>Товар отсутвует на складе.</b></p>
-                <p>Для заказа необходимо связаться с менеджером по номеру телефона: {{ contacts_for_order }}</p>
+            <p><b>Товар отсутвует на складе.</b></p>
+            <p>Для заказа необходимо связаться с менеджером по номеру телефона: {{ contacts_for_order }}</p>
             {% endif %}
 
         </div>
