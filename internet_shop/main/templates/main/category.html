@@ -3,7 +3,7 @@
 {% block title %} {{category.title}} {% endblock %}
 
 {% load static %}
-{% block for_connect_another %}<link rel="stylesheet" href="{% static 'main/css/caregory.css' %}">{% endblock%}
+{% block for_connect_another %}<link rel="stylesheet" href="{% static 'main/css/caregory_v1.css' %}">{% endblock%}
 
 {% block content %} 
 
@@ -21,6 +21,7 @@
     <h2 class="title">{{category.title}}</h2>
 </div>
 
+{% if child_categories %}
 <h3 class="title">Подкатегории</h3>
 <div class="child_categories">
     {% for child_category in child_categories %}
@@ -28,14 +29,17 @@
             <div class="child_category">
                 <a href="/category/{{ child_category.slug }}">
                     <div>
-                        <img class="aaaaaaaa" src="{{ child_category.photo.url }}" alt="">
+                        <img src="{{ child_category.photo.url }}" alt="">
                     </div>
-                    <div class="categories_title">{{child_category.title}}</div>
+                    <div class="child_category_title">{{child_category.title}}</div>
                 </a>
             </div>
         </div>
     {% endfor %}
 </div>
+{% endif %}
+
+{% if page_obj %}
 
 <h3 class="title">Товары</h3>
 
@@ -91,6 +95,7 @@
         </div>       
     {% endfor %} 
 </div>
+{% endif %}
 
 
 

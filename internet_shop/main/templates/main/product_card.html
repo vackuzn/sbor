@@ -19,17 +19,49 @@
 
 
 <div class="product_card">
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="pictures">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="main_picture">
+                    <img src="{{ product.main_image.url }}" alt="">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="additional_pictures">
+                        <a href="{{ product.main_image.url }}"><img src="{{ product.main_image.url }}" alt=""></a>
+                    {% for i in additional_pictures %}
+                        <a href="{{ i.additional_picture.url }}"><img src="{{ i.additional_picture.url }}" alt=""></a>
+                    {% endfor %}
+                </div> 
+            </div>
+            
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $(".additional_pictures a").click(function(){
+                        var largePath = $(this).attr("href");
+
+                        $(".main_picture img").attr({ src: largePath, });
+                        return false;
+                    });
+                });
+            </script>
+
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <div class="product_title_and_description">
             <div class="product_title"> <b>{{product.title}}</b></div>
             <div class="articl">Артикул: {{product.article}}</div>
             <br>
-            <br>
             {% if product.description %}
+            <br>
             <div><b>Описание:</b> {{product.description}}</div>
+            <br>
+            <br>
             {% endif %}
-            <br>
-            <br>
             <br>
             {% if product.in_stock %}
 
@@ -68,33 +100,8 @@
 
         </div>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <div class="pictures">
-            
-            <div class="main_picture">
-                <img src="{{ product.main_image.url }}" alt="">
-            </div>
 
-            <div class="additional_pictures">
-                    <a href="{{ product.main_image.url }}"><img src="{{ product.main_image.url }}" alt=""></a>
-                {% for i in additional_pictures %}
-                    <a href="{{ i.additional_picture.url }}"><img src="{{ i.additional_picture.url }}" alt=""></a>
-                {% endfor %}
-            </div> 
-            
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    $(".additional_pictures a").click(function(){
-                        var largePath = $(this).attr("href");
-
-                        $(".main_picture img").attr({ src: largePath, });
-                        return false;
-                    });
-                });
-            </script>
-
-        </div>
-    </div>
+    
 </div>
 
 

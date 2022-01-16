@@ -6,7 +6,7 @@
 
 .product_card {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 30px;
     
@@ -30,6 +30,28 @@
 .product_title_and_description .price{
     font-size: 18px;
 
+}
+
+.product_card .pictures {
+    padding-bottom: 20px;
+    padding-right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product_card .main_picture img {
+    width: 100%;
+}
+
+.product_card .additional_pictures{
+    padding-left: 5px;
+}
+
+.product_card .additional_pictures img {
+    width: 30%;
+    border: 1px solid gray;
+    border-radius: 5px;
 }
 
 
@@ -88,13 +110,3 @@ form button {
     
 }
 
-
-.main_picture img {
-    height: 350px;
-}
-
-.additional_pictures img {
-    width: 100px;
-    border: 1px solid gray;
-    border-radius: 5px;
-}
