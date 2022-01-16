@@ -4,6 +4,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Иконка-->
     <link rel="shortcut icon" href="{% static 'img/only_logo.ico' %}" type="image/x-icon">
@@ -24,85 +25,134 @@
 </head>
 
 <body>
-    <div class="upper_band" id="upper">
-        <div class="upper_band_firs_band">
-            <div class='logo'>
-                <a href="{% url 'main_page' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
-            </div>
-            <div class='contacts'>
-                <div class="contacts_raw">
-                    <img src="{% static 'img/clock.png' %}" alt="">
-                    <p><b>{{ contacts_time }}</b></p>
-                </div>
-                <div class="contacts_raw">
-                    <img src="{% static 'img/phone.png' %}" alt="">
-                    <p><b>{{ contacts_telephone }}</b></p>
-                </div>
-                <div class="contacts_raw">
-                    <img src="{% static 'img/mail.png' %}" alt="">
-                    <p><b>{{ contacts_email }}</b></p>
-                </div>
-            </div>
+    <div class="container_for_upper_band">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+            <div class="upper_band">
+                <div class="upper_band_firs_band">
 
-            <div class='login'>
-                {% if request.user.is_authenticated %}
-                    <div class="is_authenticated">
-                        {{ request.user.username }} | <a href="{% url 'logout' %}">Выйти</a>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class='logo'>
+                            <a href="{% url 'main_page' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                        </div>
                     </div>
-                {% else %}
-                <div class="first_line">
-                    <form action="{% url 'login' %}" method="POST">
-                        {% csrf_token %}
-                        <input class="folder" name="username" placeholder="логин">
-                        <input class="folder" name="password" type="password" placeholder="пароль">
-                        <input class="button" type="submit" value="Войти">
-                    </form>
-                </div>
-                <div class="second_line">
-                    <a href="{% url 'register' %}">Регистрация</a>
-                </div>
-                {% endif %}
 
-            </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class='contacts'>
+                            <div class="contacts_raw">
+                                <img src="{% static 'img/clock.png' %}" alt="">
+                                <p><b>{{ contacts_time }}</b></p>
+                            </div>
+                            <div class="contacts_raw">
+                                <img src="{% static 'img/phone.png' %}" alt="">
+                                <p><b>{{ contacts_telephone }}</b></p>
+                            </div>
+                            <div class="contacts_raw">
+                                <img src="{% static 'img/mail.png' %}" alt="">
+                                <p><b>{{ contacts_email }}</b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class='login'>
+                            {% if request.user.is_authenticated %}
+                                <div class="is_authenticated">
+                                    {{ request.user.username }} | <a href="{% url 'logout' %}">Выйти</a>
+                                </div>
+                            {% else %}
+                            <div class="first_line">
+                                <form action="{% url 'login' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input class="folder" name="username" placeholder="логин">
+                                    <input class="folder" name="password" type="password" placeholder="пароль">
+                                    <input class="button" type="submit" value="Войти">
+                                </form>
+                            </div>
+
+                            <div class="second_line">
+                                <a href="{% url 'register' %}">Регистрация</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sticky">
+                    <div class="upper_band_second_band">
+
+                        <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
+                            <button id="menu_button" class="menu_button">
+                                <div class="button_img"><img src="{% static 'img/menu_img.png' %}" alt=""></div>
+                                <div class="button_text">МЕНЮ</div>
+                            </button>
+                        </div>
+            
+                        <div class="hidden-xs hidden-sm col-md-10 col-lg-10">
+                            <div class="menu">
+                                <div class="menu_links"><a href="{% url 'global_categories' %}">ГЛАВНАЯ</a></div>
+                                <div class="menu_links"><a href="{% url 'search_order' %}">ПОИСК ЗАКАЗА</a></div>
+                                <div class="menu_links"><a href="{% url 'my_order' %}">МОИ ЗАКАЗЫ</a></div> 
+                                <div class="menu_links"><a href="{% url 'contacts' %}">КОНТАКТЫ</a></div> 
+                                <div class="menu_links"><a href="{% url 'wish' %}">ПОЖЕЛАНИЯ</a></div> 
+                                <div class="menu_links"><a href="{% url 'delivery_terms' %}">УСЛОВИЯ ДОСТАВКИ</a></div>
+                                {% if request.user.is_superuser %}
+                                <div class="menu_links"><a href="/admin">АДМИНКА</a></div>
+                                {% endif %}
+                            </div>
+                        </div>
+            
+                        <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
+                            <a href="{% url 'cart' %}" class="basket">
+                                <div class="basket_img">
+                                    <img src="{% static 'img/icon_basket_mosbasa.svg' %}" alt="">
+                                    <h6 class="product_quantity">{{ cart|length }}</h6>
+                                </div>
+                                <div class="basket_text">
+                                    <p>Корзина</p>
+                                    <p><b>{{cart.get_total_price}} руб.</b></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container_for_dropdown_menu"></div>
+                    <div class="dropdown_menu">
+                        <div class="menu_links"><a href="{% url 'global_categories' %}">ГЛАВНАЯ</a></div>
+                        <div class="menu_links"><a href="{% url 'search_order' %}">ПОИСК ЗАКАЗА</a></div>
+                        <div class="menu_links"><a href="{% url 'my_order' %}">МОИ ЗАКАЗЫ</a></div> 
+                        <div class="menu_links"><a href="{% url 'contacts' %}">КОНТАКТЫ</a></div> 
+                        <div class="menu_links"><a href="{% url 'wish' %}">ПОЖЕЛАНИЯ</a></div> 
+                        <div class="menu_links"><a href="{% url 'delivery_terms' %}">УСЛОВИЯ ДОСТАВКИ</a></div>
+                        {% if request.user.is_superuser %}
+                        <div class="menu_links"><a href="/admin">АДМИН ПАНЕЛЬ</a></div>
+                        {% endif %}
+                    </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            $("#menu_button").click(function(){
+                                $(".dropdown_menu").slideToggle("fast");
+                                $(this).toggleClass("active"); 
+                            });
+                        });
+                    </script>
+                </div>
         </div>
-        
-        <br>
-
-        <div class="upper_band_second_band">
-            <div class="menu">
-                <div class="menu_links"><a href="{% url 'global_categories' %}">ГЛАВНАЯ</a></div>
-                <div class="menu_links"><a href="{% url 'search_order' %}">ПОИСК ЗАКАЗА</a></div>
-                <div class="menu_links"><a href="{% url 'my_order' %}">МОИ ЗАКАЗЫ</a></div> 
-                <div class="menu_links"><a href="{% url 'contacts' %}">КОНТАКТЫ</a></div> 
-                <div class="menu_links"><a href="{% url 'wish' %}">ПОЖЕЛАНИЯ</a></div> 
-                <div class="menu_links"><a href="{% url 'delivery_terms' %}">УСЛОВИЯ ДОСТАВКИ</a></div>
-                {% if request.user.is_superuser %}
-                <div class="menu_links"><a href="/admin">АДМИН ПАНЕЛЬ</a></div>
-                {% endif %}
-            </div>
-            <a href="{% url 'cart' %}" class="basket">
-                <div class="basket_img">
-                    <img src="{% static 'img/icon_basket_mosbasa.svg' %}" alt="">
-                    <h6 class="product_quantity">{{ cart|length }}</h6>
-                </div>
-                <div class="basket_text">
-                    <p>Корзина</p>
-                    <p><b>{{cart.get_total_price}} руб.</b></p>
-                </div>
-            </a>
-        </div>
-    </div>  
-
-    <div class="container_content">
-        {% block content %} 
-        {% endblock%}
     </div>
 
-    <br>
-    <br>
+    <div class="container_for_content_conteiner">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+            <div class="container_content">
+                {% block content %} 
+                {% endblock%}
+            </div>
+        </div>
+    </div>
 
-    <div class="footer">
-        <div class="container_footer">
+
+    <div class="container_for_footer">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="first_column">
                 <div class="logo">
                     <div class="logo_img">
@@ -113,25 +163,25 @@
                         <div>Товары и продукты с доставкой</div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="second_column">
                 <p>{{ contacts_time }}</p>
                 <p>{{ contacts_telephone }}</p>
                 <p>{{ contacts_email }}</p>
-            </div>
-            <div class="second_column">
-                <div class="footer_menu">
-                    <h3>Меню</h3>
-                    <a href="{% url 'global_categories' %}">ГЛАВНАЯ</a>
-                    <a href="{% url 'search_order' %}">ПОИСК ЗАКАЗА</a>
-                    <a href="{% url 'my_order' %}">МОИ ЗАКАЗЫ</a> 
-                    <a href="{% url 'contacts' %}">КОНТАКТЫ</a>
-                </div>
             </div>
         </div>
     </div>
 
 
 
-    
+   
+
+
+
+
     
 
 </body>
