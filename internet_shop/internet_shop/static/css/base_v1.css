@@ -225,6 +225,8 @@
     position: absolute;
     padding: 0px 10px 10px 7px;
     background-color: white;
+    border: 1px solid #00C618;
+    border-radius: 5%;
     z-index: 100;
 }
 
