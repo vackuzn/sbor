@@ -9,24 +9,24 @@
 
 <h2 class="title">Контакты</h2>
 <div class="contacts2">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4">
         <div class="descriprion">
             <div class="contacts_raw">
                 <img src="{% static 'img/clock.png' %}" alt="">
-                <p><b>Ежедневно с 9:00 до 21:00</b></p>
+                <p><b>{{ contacts_time }}</b></p>
             </div>
             <div class="contacts_raw">
                 <img src="{% static 'img/phone.png' %}" alt="">
-                <p><b>+798173635990</b></p>
+                <p><b>{{ contacts_telephone }}</b></p>
             </div>
             <div class="contacts_raw">
                 <img src="{% static 'img/mail.png' %}" alt="">
-                <p><b>sbor-market@mail.ru</b></p>
+                <p><b>{{ contacts_email }}</b></p>
             </div>
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-8">
         <div class="map">
             <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aadf3651ac555cfc084b7851a6ccda26ba80b19b3b5a4ce5c40c651e933ac7f1f&amp;width=619&amp;height=486&amp;lang=ru_RU&amp;scroll=true"></script>
         </div>
